@@ -1,0 +1,94 @@
+<div class="text-center">
+  <h4>Sign Up</h4>
+</div>
+<form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+  <mat-form-field class="full-width">
+    <input formControlName="email" matInput placeholder="Email" />
+    <mat-hint
+      *ngIf="
+        userForm.get('email').touched && userForm.get('email').errors?.required
+      "
+    >
+      Email is required
+    </mat-hint>
+    <mat-hint
+    *ngIf="
+      userForm.get('email').touched && userForm.get('email').errors?.email
+    "
+  >
+    Enter valid email
+  </mat-hint>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input formControlName="login" matInput placeholder="Login" />
+    <mat-hint
+      *ngIf="
+        userForm.get('login').touched && userForm.get('login').errors?.required
+      "
+    >
+      Login is required.
+    </mat-hint>
+    <mat-hint
+    *ngIf="
+      userForm.get('login').touched &&
+      userForm.get('login').errors?.minlength
+    "
+  >
+  Min length - 6.
+  </mat-hint>
+  </mat-form-field>
+
+  <mat-form-field class="full-width">
+    <input type="password" formControlName="password" matInput placeholder="Password" />
+    <mat-hint
+      *ngIf="
+        userForm.get('password').touched &&
+        userForm.get('password').errors?.required
+      "
+    >
+      Password is required.
+    </mat-hint>
+    <mat-hint
+    *ngIf="
+      userForm.get('password').touched &&
+      userForm.get('password').errors?.pattern
+    "
+  >
+    No specialcharacters allowed
+  </mat-hint>
+  <mat-hint
+  *ngIf="
+    userForm.get('password').touched &&
+    userForm.get('password').errors?.minlength
+  "
+>
+Min length - 6.
+</mat-hint>
+  </mat-form-field>
+  <mat-form-field class="full-width">
+    <input
+      type="password"
+      formControlName="confirmPassword"
+      matInput
+      placeholder="Confirm password"
+    />
+    <mat-hint
+      *ngIf="
+        userForm.get('confirmPassword').touched &&
+        userForm.get('confirmPassword').errors
+      "
+    >
+      Password don't match
+    </mat-hint>
+  </mat-form-field>
+  <p>
+    <button
+      type="submit"
+      mat-raised-button
+      color="primary"
+     
+    >
+      Save
+    </button>
+  </p>
+</form>
