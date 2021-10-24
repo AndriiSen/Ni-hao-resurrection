@@ -7,7 +7,11 @@ import {
   RegistrationSchema,
 } from './schemas/registration.schema';
 import { Model } from 'mongoose';
-import * as argon2 from 'argon2';
+
+import * as bcrypt from 'bcrypt';
+
+const dotenv = require('dotenv').config()
+
 @Injectable()
 export class RegistrationService {
   constructor(
@@ -16,10 +20,11 @@ export class RegistrationService {
   ) {}
 
   async create(createDto: createUserDto): Promise<Registration> {
+    const saltRounds = +process.env.salt
     const newRegistration = new this.registrationModel({
       ...createDto,
       date: new Date().toString(),
-      password: await argon2.hash('password'),
+      password: await bcrypt.hash('password', saltRounds),
     });
     return newRegistration.save();
   }
