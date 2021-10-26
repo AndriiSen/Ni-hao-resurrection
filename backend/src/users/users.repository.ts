@@ -16,7 +16,7 @@ export class UsersRepository {
     }
 
     async create(user: User): Promise<User> {
-        const newUser = new this.userModel(user);
+        const newUser = new this.userModel(user)
         return newUser.save()
     }
 
