@@ -29,6 +29,8 @@
     "@nestjs/platform-express": "^8.0.0",
     "argon2": "^0.28.2",
     "bcrypt": "^5.0.1",
+    "class-transformer": "^0.4.0",
+    "class-validator": "^0.13.1",
     "dotenv": "^10.0.0",
     "env-cmd": "^10.1.0",
     "kill-port-process": "3.0.0",
