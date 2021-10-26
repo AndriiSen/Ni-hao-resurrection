@@ -13,8 +13,8 @@ export class AuthController {
     }
 
     @Post('login')
-    async getUserByLogin(@Body() loginUserDto: LoginUserDto): Promise<User> {
-        return this.authService.getUserByLogin(loginUserDto.login)
+    async validateUser(@Body() loginUserDto: LoginUserDto): Promise<User> {
+        return this.authService.validateUser(loginUserDto.login, loginUserDto.password)
     }
     
 } 
