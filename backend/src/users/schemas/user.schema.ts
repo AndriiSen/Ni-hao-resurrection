@@ -9,13 +9,13 @@ export class User {
 
     @Prop()
     login: string;
-  
+
     @Prop()
     email: string;
-  
+
     @Prop()
     password: string;
-  
+
     @Prop()
     date: string;
 }

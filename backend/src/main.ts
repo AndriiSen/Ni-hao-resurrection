@@ -1,16 +1,21 @@
 import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { useContainer } from 'class-validator';
 import { AppModule } from './app.module';
+require('dotenv').config();
+import * as cookieParser from 'cookie-parser';
 
-const dotenv = require('dotenv').config();
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('api');
   app.useGlobalPipes(new ValidationPipe({
     transform: true
   }));
-  useContainer(app.select(AppModule), { fallbackOnErrors: true });
+  app.enableCors({
+    origin: 'http://localhost/4200',
+    credentials: true
+  });
+  app.use(cookieParser());
+
   const PORT = process.env.PORT || 3000;
   await app.listen(PORT);
 }

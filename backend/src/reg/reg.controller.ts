@@ -7,7 +7,7 @@ import { RegService } from "./reg.service";
 
 @Controller('reg')
 export class RegController {
-    constructor (private readonly regService: RegService) {}
+    constructor(private readonly regService: RegService) { }
 
     @Post()
     async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {

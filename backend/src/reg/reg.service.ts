@@ -7,10 +7,10 @@ import { UsersRepository } from "src/users/users.repository";
 
 @Injectable()
 export class RegService {
-    constructor(private readonly usersRepository: UsersRepository) {}
+    constructor(private readonly usersRepository: UsersRepository) { }
     async createUser(email: string, login: string, password: string): Promise<User> {
         const user = await this.usersRepository.findOne({ email });
-        if(user) {
+        if (user) {
             throw new ConflictException({
                 statusCode: 409,
                 message: 'This email is already registred'

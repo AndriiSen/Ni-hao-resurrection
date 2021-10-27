@@ -5,12 +5,12 @@ import { User, UserDocument } from "./schemas/user.schema";
 
 @Injectable()
 export class UsersRepository {
-    constructor(@InjectModel(User.name) private userModel: Model<User>){}
+    constructor(@InjectModel(User.name) private userModel: Model<User>) { }
 
     async findOne(userFilterQuery: FilterQuery<User>): Promise<User> {
         return this.userModel.findOne(userFilterQuery);
     }
-    
+
     async find(userFilterQuery: FilterQuery<User>): Promise<User[]> {
         return this.userModel.find(userFilterQuery)
     }

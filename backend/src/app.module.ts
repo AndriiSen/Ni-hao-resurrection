@@ -5,13 +5,12 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { RegModule } from './reg/reg.module';
+require('dotenv').config()
 
 
-
-const dotenv = require('dotenv').config();
 @Module({
   imports: [
-    MongooseModule.forRoot(process.env.DB_URI), 
+    MongooseModule.forRoot(process.env.DB_URI),
     UsersModule,
     AuthModule,
     RegModule
@@ -19,4 +18,4 @@ const dotenv = require('dotenv').config();
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }

@@ -6,9 +6,9 @@ import { RegController } from "./reg.controller";
 import { RegService } from "./reg.service";
 
 @Module({
-    imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema}])],
+    imports: [MongooseModule.forFeature([{ name: User.name, schema: UserSchema }])],
     controllers: [RegController],
     providers: [RegService, UsersRepository]
 })
 
-export class RegModule {}
+export class RegModule { }
