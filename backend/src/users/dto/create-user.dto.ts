@@ -1,7 +1,7 @@
 import { IsEmail, IsNotEmpty, Matches, MinLength } from "class-validator";
-//Валидация пароля с помощью регулярного выражения???
+//--------------------------------------------------------------------
 // const regexpPassword = new RegExp('^[a-zA-Z0-9]{6}$');
-
+//--------------------------------------------------------------------
 
 export class CreateUserDto {
 
@@ -15,11 +15,13 @@ export class CreateUserDto {
 
     @IsEmail()
     readonly email: string;
-
+//--------------------------------------------------------------------
     // @Matches(regexpPassword, {
     //     message: 'No special characters allowed and min length - 6'
     // })
+//--------------------------------------------------------------------
     readonly password: string;
+
 
     readonly date: string;
 }
