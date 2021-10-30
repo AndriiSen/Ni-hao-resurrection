@@ -1,8 +1,8 @@
-import { Body, Controller, Post, Res, UnauthorizedException } from "@nestjs/common";
+import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { AuthUserDto } from "./dto/auth-user.dto"
 import { AuthService } from "./auth.service";
 import { Response } from "express";
-import { JwtService } from "@nestjs/jwt";
+import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 
 
 
@@ -22,6 +22,13 @@ export class AuthController {
         const jwtToken = await this.authService.generateJwtToken(loginUserDto.email)
         res.setHeader('JWT', jwtToken)
         return res.json(user)
+    }
+
+    // Тест работы гварда
+    @UseGuards(JwtAuthGuard)
+    @Get('protected')
+    async getSomeData (): Promise<any> {
+        return 'Here is your data, come and get it.'
     }
 
 }
