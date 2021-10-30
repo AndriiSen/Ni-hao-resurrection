@@ -11,7 +11,7 @@ export class AuthService {
         private readonly usersRepository: UsersRepository,
         private readonly jwtService: JwtService
     ) { }
-    
+
     async validateAndLogin(email: string, password: string): Promise<any> {
         const user = await this.usersRepository.findOne({ email });
         if (!user) {
@@ -28,7 +28,7 @@ export class AuthService {
         }
     }
 
-    async generateJwtToken (email: string): Promise<any> {
+    async generateJwtToken(email: string): Promise<any> {
         const jwtToken = await this.jwtService.signAsync({ email: email })
         return jwtToken
     }

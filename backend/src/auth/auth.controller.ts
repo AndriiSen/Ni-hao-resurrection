@@ -27,7 +27,7 @@ export class AuthController {
     // Тест работы гварда
     @UseGuards(JwtAuthGuard)
     @Get('protected')
-    async getSomeData (): Promise<any> {
+    async getSomeData(): Promise<any> {
         return 'Here is your data, come and get it.'
     }
 

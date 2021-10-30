@@ -6,7 +6,7 @@ import { User, UserSchema } from "src/users/schemas/user.schema";
 import { UsersRepository } from "src/users/users.repository";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
-import { JwtStrategy } from "./jwt.strategy";
+import { JwtStrategy } from "../strategies/jwt.strategy";
 require('dotenv').config();
 
 
