@@ -11,6 +11,10 @@ export class UsersRepository {
         return this.userModel.findOne(userFilterQuery);
     }
 
+    async generateId() {
+        return this.userModel.count()
+    }
+
     async find(userFilterQuery: FilterQuery<User>): Promise<User[]> {
         return this.userModel.find(userFilterQuery)
     }

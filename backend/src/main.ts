@@ -2,7 +2,6 @@ import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 require('dotenv').config();
-import * as cookieParser from 'cookie-parser';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -11,10 +10,9 @@ async function bootstrap() {
     transform: true
   }));
   app.enableCors({
-    origin: 'http://localhost/4200',
+    origin: process.env.CORS_URL,
     credentials: true
   });
-  app.use(cookieParser());
 
   const PORT = process.env.PORT || 3000;
   await app.listen(PORT);

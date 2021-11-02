@@ -1,7 +1,8 @@
-import { Injectable, UnauthorizedException } from "@nestjs/common";
+import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersRepository } from "src/users/users.repository";
 import * as bcrypt from 'bcrypt';
 import { JwtService } from "@nestjs/jwt";
+import { User } from "src/users/schemas/user.schema";
 
 
 
@@ -32,5 +33,22 @@ export class AuthService {
         const jwtToken = await this.jwtService.signAsync({ email: email })
         return jwtToken
     }
-
+    
+    async createUser(email: string, login: string, password: string): Promise<User> {
+        const user = await this.usersRepository.findOne({ email });
+        if (user) {
+            throw new ConflictException({
+                statusCode: 409,
+                message: 'This email is already registred'
+            })
+        }
+        const newUserID = await this.usersRepository.generateId()
+        return this.usersRepository.create({
+            userId: String(newUserID + 1),
+            date: String(Date.now()),
+            email,
+            login,
+            password: await bcrypt.hash(password, +process.env.salt)
+        });
+    }
 }

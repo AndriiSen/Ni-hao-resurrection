@@ -4,7 +4,6 @@ import { AppService } from './app.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
-import { RegModule } from './reg/reg.module';
 require('dotenv').config()
 
 
@@ -12,8 +11,7 @@ require('dotenv').config()
   imports: [
     MongooseModule.forRoot(process.env.DB_URI),
     UsersModule,
-    AuthModule,
-    RegModule
+    AuthModule
   ],
   controllers: [AppController],
   providers: [AppService],

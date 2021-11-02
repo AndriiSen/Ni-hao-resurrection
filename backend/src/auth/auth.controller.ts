@@ -2,7 +2,11 @@ import { Body, Controller, Get, Post, Res, UnauthorizedException, UseGuards } fr
 import { AuthUserDto } from "./dto/auth-user.dto"
 import { AuthService } from "./auth.service";
 import { Response } from "express";
+import { CreateUserDto } from "src/users/dto/create-user.dto";
+import { User } from "src/users/schemas/user.schema";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
+
+
 
 
 
@@ -13,22 +17,19 @@ export class AuthController {
         private readonly authService: AuthService,
     ) { };
 
-    @Post()
+    @Post('login')
     async validateAndLogin(@Body() loginUserDto: AuthUserDto, @Res() res: Response): Promise<any> {
         const user = await this.authService.validateAndLogin(loginUserDto.email, loginUserDto.password)
         if (!user) {
             throw new UnauthorizedException()
         }
         const jwtToken = await this.authService.generateJwtToken(loginUserDto.email)
-        res.setHeader('JWT', jwtToken)
+        res.setHeader('Auth-Token', jwtToken)
         return res.json(user)
     }
 
-    // Тест работы гварда
-    @UseGuards(JwtAuthGuard)
-    @Get('protected')
-    async getSomeData(): Promise<any> {
-        return 'Here is your data, come and get it.'
+    @Post('register')
+    async createUser(@Body() createUserDto: CreateUserDto): Promise<User> {
+        return this.authService.createUser(createUserDto.email, createUserDto.login, createUserDto.password);
     }
-
 }
