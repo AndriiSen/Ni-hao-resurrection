@@ -44,7 +44,7 @@ export class AuthService {
         }
         const newUserID = await this.usersRepository.generateId()
         return this.usersRepository.create({
-            userId: String(newUserID + 1),
+            userId: newUserID + 1,
             date: String(Date.now()),
             email,
             login,
