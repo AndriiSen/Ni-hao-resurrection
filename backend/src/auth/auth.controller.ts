@@ -4,7 +4,6 @@ import { AuthService } from "./auth.service";
 import { Response } from "express";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { User } from "src/users/schemas/user.schema";
-import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 
 
 
