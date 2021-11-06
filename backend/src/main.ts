@@ -1,9 +1,19 @@
+import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+require('dotenv').config();
 
-const dotenv = require('dotenv').config();
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+  app.setGlobalPrefix('api');
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true
+  }));
+  app.enableCors({
+    origin: process.env.FRONT_URL,
+    credentials: true
+  });
+
   const PORT = process.env.PORT || 3000;
   await app.listen(PORT);
 }
