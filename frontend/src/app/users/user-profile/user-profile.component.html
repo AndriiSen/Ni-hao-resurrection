@@ -1,0 +1,33 @@
+<p>user-profile works!</p>
+<div class="width-conteiner">
+
+</div>
+<mat-grid-list cols="3" rowHeight="200px">
+  <mat-grid-tile class="card-conteiner" colspan="2">
+    <mat-card class="card">
+      <mat-card-title-group class="user-card_title">
+        <mat-card-title>{{ userName }}</mat-card-title>
+        <mat-card-subtitle>{{ userDecription }}</mat-card-subtitle>
+        <img
+          class="profile-image"
+          mat-card-sm-image
+          src='{{imageUrl}}'
+        />
+      </mat-card-title-group>
+      <mat-card-content class="user-card-content">
+        {{ longText }}
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile class="card-conteiner">
+    <mat-card class="card activities-card">
+      <div>
+        LIKES
+      </div>
+      <div>
+        REPOSTS
+      </div>
+    </mat-card>
+  </mat-grid-tile>
+
+</mat-grid-list>
