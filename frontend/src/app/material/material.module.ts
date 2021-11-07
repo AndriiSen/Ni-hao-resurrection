@@ -4,6 +4,10 @@ import { MatFormFieldModule, } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
 import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatIconModule } from '@angular/material/icon';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatTabsModule } from '@angular/material/tabs'
 
 
 const MaterialComponents = [
@@ -11,7 +15,11 @@ const MaterialComponents = [
   MatFormFieldModule,
   MatInputModule,
   MatCardModule,
-  MatGridListModule
+  MatGridListModule,
+  MatIconModule,
+  MatBadgeModule,
+  MatDividerModule,
+  MatTabsModule
 ];
 
 @NgModule({

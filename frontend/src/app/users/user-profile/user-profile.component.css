@@ -1,25 +1,75 @@
-.card-conteiner{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-}
-.card{
-    width: 100%;
-    height: 100%;
-}
-.user-card_title{
-    margin-top: 20px;
+.width-conteiner {
+  max-width: 980px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
-.profile-image{
-    border-radius: 50%;
+/* Left-conteiner */
+
+.left-conteiner {
+  padding: 20px;
 }
 
-.user-card-content{
-    margin-top: 20px;
+.profile-image-conteiner {
+  display: flex;
+  justify-content: center;
 }
 
-.activities-card{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+.profile-photo {
+  height: 200px;
 }
 
+.hobbies h3 {
+  margin-bottom: 0;
+}
+
+.hobbies-list {
+  padding: 10px 0 10px 20px;
+}
+
+/* Right-conteiner */
+
+.right-conteiner {
+  padding: 20px;
+}
+.short-description {
+    font-style: italic;
+}
+
+.buttons {
+  margin-top: 25px;  
+  display: flex;
+  justify-content: flex-end;
+}
+.buttons button {
+  margin-left: 5px;
+}
+
+.about-section {
+  margin-top: 50px;
+}
+
+.about-me-text,
+.contacts-section {
+  padding: 20px;
+}
+
+.phone,
+.address,
+.email,
+.site {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.contacts-section a {
+  text-decoration: none;
+  color: #000;
+}
+
+.contacts-section h4 {
+  margin: 0 15px 10px 5px;
+}
