@@ -1,8 +1,9 @@
-import { ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { BadRequestException, ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
 import { UsersRepository } from "src/users/users.repository";
 import * as bcrypt from 'bcrypt';
 import { JwtService } from "@nestjs/jwt";
 import { User } from "src/users/schemas/user.schema";
+import { UpdateUserDto } from "src/users/dto/update-user.dto";
 
 
 
@@ -50,5 +51,17 @@ export class AuthService {
             login,
             password: await bcrypt.hash(password, +process.env.salt)
         });
+    }
+
+    async updateUserInfo(userId: number, updateInfo: string): Promise<any> {
+        return this.usersRepository.findOneAndUpdate( { userId }, updateInfo)
+    }
+
+    async getUserProfile(userId: number): Promise<any> {
+        const user = await this.usersRepository.findOne({ userId })
+        if (!user) {
+            throw new BadRequestException('Invalid user')
+        }
+        return user.userInfo
     }
 }
