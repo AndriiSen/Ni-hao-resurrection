@@ -1,1 +1,116 @@
-<p>update-profile works!</p>
+<div class="width-conteiner">
+  <form [formGroup]="userInfo" (ngSubmit)="onSubmit()">
+    <div class="personal-info-section">
+      <h3>Personal data</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Last Name</mat-label>
+        <input matInput formControlName="lastname" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Nikname</mat-label>
+        <input matInput formControlName="nikname" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>District</mat-label>
+        <input matInput formControlName="district" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>City</mat-label>
+        <input matInput formControlName="city" />
+      </mat-form-field>
+    </div>
+
+    <div class="car-info-section">
+      <h3>Car info</h3>
+      <mat-form-field appearance="fill">
+        <mat-label>Style</mat-label>
+        <mat-select formControlName="tuningStyle">
+          <mat-option value="JDM">JDM</mat-option>
+          <mat-option value="HOT ROD">HOT ROD</mat-option>
+          <mat-option value="STREET ROD">STREET ROD</mat-option>
+          <mat-option value="CHOP-TOP">CHOP-TOP</mat-option>
+          <mat-option value="RAT LOOK">RAT LOOK</mat-option>
+          <mat-option value="HOT RIDE">HOT RIDE</mat-option>
+          <mat-option value="WOODY">WOODY</mat-option>
+          <mat-option value="MUSCLE CAR">MUSCLE CAR</mat-option>
+          <mat-option value="LOWRIDER">LOWRIDER</mat-option>
+          <mat-option value="DUB">DUB</mat-option>
+          <mat-option value="DONK">DONK</mat-option>
+          <mat-option value="VIP (BIPPU)">VIP (BIPPU)</mat-option>
+          <mat-option value="FITMENT">FITMENT</mat-option>
+          <mat-option value="HELLO KITTY">HELLO KITTY</mat-option>
+          <mat-option value="DRIFT">DRIFT</mat-option>
+          <mat-option value="DRAG">DRAG</mat-option>
+          <mat-option value="WRC">WRC</mat-option>
+          <mat-option value="DTM">DTM</mat-option>
+          <mat-option value="BOSOZOKU">BOSOZOKU</mat-option>
+          <mat-option value="LUXURI">LUXURI</mat-option>
+          <mat-option value="LIMO">LIMO</mat-option>
+          <mat-option value="Kolhoz">Kolhoz</mat-option>
+        </mat-select>
+        <mat-hint align="end">Select your style</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Body type</mat-label>
+        <mat-select formControlName="bodyType">
+          <mat-option value="SEDAN">SEDAN</mat-option>
+          <mat-option value="COUPE">COUPE</mat-option>
+          <mat-option value="SPORTS CAR">SPORTS CAR</mat-option>
+          <mat-option value="STATION WAGON">STATION WAGON</mat-option>
+          <mat-option value="HATCHBACK">HATCHBACK</mat-option>
+          <mat-option value="CONVERTIBLE">CONVERTIBLE</mat-option>
+          <mat-option value="SPORT-UTILITY VEHICLE (SUV)">SPORT-UTILITY VEHICLE (SUV)</mat-option>
+          <mat-option value="MINIVAN">MINIVAN</mat-option>
+          <mat-option value="PICKUP TRUCK">PICKUP TRUCK</mat-option>
+          <mat-option value="LIMOUSINE">LIMOUSINE</mat-option>
+        </mat-select>
+        <mat-hint align="end">Select body type</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Brand</mat-label>
+        <input matInput formControlName="brand"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Model</mat-label>
+        <input matInput formControlName="model" />
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Year</mat-label>
+        <input matInput formControlName="year"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Fuel type</mat-label>
+        <mat-select formControlName="fuelType">
+          <mat-option value="Gasoline">Gasoline</mat-option>
+          <mat-option value="Diesel">Diesel</mat-option>
+          <mat-option value="Electricity">Electricity</mat-option>
+          <mat-option value="Hybrid">Hybrid</mat-option>
+        </mat-select>
+        <mat-hint align="end">Select type of fuel</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Transmission</mat-label>
+        <mat-select formControlName="transmission">
+          <mat-option value="Manual">Manual</mat-option>
+          <mat-option value="Automatic">Automatic</mat-option>
+        </mat-select>
+        <mat-hint align="end">Select transmission type</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Engine volume</mat-label>
+        <input matInput formControlName="engineVolume"/>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Purchase story</mat-label>
+        <textarea matInput class="buy-story" formControlName="purchaseStory"></textarea>
+      </mat-form-field>
+      <button mat-raised-button color="primary" type="submit">
+        Update profile
+      </button>
+    </div>
+  </form>
+</div>
