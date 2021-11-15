@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 import { MustMatch } from 'src/app/_helpers/must.match.validator';
 import { UserAuthorizationService } from '../../../shared/services/user-authorization.service';
@@ -27,9 +28,26 @@ export class RegisterComponent implements OnInit {
     validator: MustMatch('password', 'confirmPassword')
   });
 
+  loginForm = new FormGroup({
+    email: new FormControl(''),
+    password: new FormControl('')
+  })
   ngOnInit(): void { }
 
   onSubmit() {
     this.svc.sendRegForm(this.userForm.value).subscribe();
+  }
+
+  login() {
+    this.svc.sendLoginForm(this.loginForm.value).pipe(first())
+      .subscribe(
+        (data: any) => {
+          localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'))
+          console.log(
+            JSON.parse(
+              atob(localStorage.getItem('Auth-Token')!.split('.')[1])
+            )
+          );
+        });
   }
 }

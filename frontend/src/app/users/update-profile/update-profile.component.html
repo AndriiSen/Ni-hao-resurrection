@@ -3,8 +3,8 @@
     <div class="personal-info-section">
       <h3>Personal data</h3>
       <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input matInput formControlName="name" />
+        <mat-label>First Name</mat-label>
+        <input matInput formControlName="name"/>
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Last Name</mat-label>
@@ -63,7 +63,9 @@
           <mat-option value="STATION WAGON">STATION WAGON</mat-option>
           <mat-option value="HATCHBACK">HATCHBACK</mat-option>
           <mat-option value="CONVERTIBLE">CONVERTIBLE</mat-option>
-          <mat-option value="SPORT-UTILITY VEHICLE (SUV)">SPORT-UTILITY VEHICLE (SUV)</mat-option>
+          <mat-option value="SPORT-UTILITY VEHICLE (SUV)"
+            >SPORT-UTILITY VEHICLE (SUV)</mat-option
+          >
           <mat-option value="MINIVAN">MINIVAN</mat-option>
           <mat-option value="PICKUP TRUCK">PICKUP TRUCK</mat-option>
           <mat-option value="LIMOUSINE">LIMOUSINE</mat-option>
@@ -72,7 +74,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Brand</mat-label>
-        <input matInput formControlName="brand"/>
+        <input matInput formControlName="brand" />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Model</mat-label>
@@ -80,7 +82,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Year</mat-label>
-        <input matInput formControlName="year"/>
+        <input matInput formControlName="year" />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Fuel type</mat-label>
@@ -102,11 +104,15 @@
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Engine volume</mat-label>
-        <input matInput formControlName="engineVolume"/>
+        <input matInput formControlName="engineVolume" />
       </mat-form-field>
       <mat-form-field appearance="fill">
         <mat-label>Purchase story</mat-label>
-        <textarea matInput class="buy-story" formControlName="purchaseStory"></textarea>
+        <textarea
+          matInput
+          class="buy-story"
+          formControlName="purchaseStory"
+        ></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">
         Update profile

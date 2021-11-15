@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UpdateProfileService } from 'src/app/shared/services/update-profile.service';
+import { map } from 'rxjs/operators';
+import { UserProfileService } from 'src/app/shared/services/user-profile.service';
 
 @Component({
   selector: 'app-update-profile',
@@ -10,11 +11,10 @@ import { UpdateProfileService } from 'src/app/shared/services/update-profile.ser
   styleUrls: ['./update-profile.component.css']
 })
 export class UpdateProfileComponent implements OnInit {
-  public idFromUrl!: string
+  public userId!: number
   private routeSub!: Subscription;
 
-  constructor( private svc: UpdateProfileService, private route: ActivatedRoute) { }
-  
+  constructor(private svc: UserProfileService, private route: ActivatedRoute) { }
   userInfo = new FormGroup({
     name: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
@@ -30,16 +30,17 @@ export class UpdateProfileComponent implements OnInit {
     transmission: new FormControl(''),
     engineVolume: new FormControl(''),
     purchaseStory: new FormControl(''),
-  })
+  });
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
-      this.idFromUrl = params['id']
+      this.userId = parseInt(params['id']);
     });
   }
   onSubmit(): void {
-    console.log(this.userInfo, this.idFromUrl)
-    this.svc.updateUserInfo(this.userInfo.value, this.idFromUrl).subscribe();
-
+    this.svc.updateUserInfo(this.userInfo.value, this.userId).subscribe();
+  }
+  ngOnDestroy() {
+    this.routeSub.unsubscribe();
   }
 }

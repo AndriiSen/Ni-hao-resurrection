@@ -1,72 +1,90 @@
-<div class="width-conteiner">
-  <div class="left-conteiner">
-    <div class="profile-image-conteiner">
-      <img
-        class="profile-photo"
-        src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
-        alt="profile photo"
-      />
+<div *ngIf="user">
+  <div class="conteiner">
+    <div class="left-side">
+      <figure class="main-info">
+        <img
+          src="https://a.d-cd.net/16AB4DWS8GpmXYucXhko0sMYzis-1920.jpg"
+          alt="Car photo"
+        />
+        <figcaption>
+          {{ user.name }} {{ user.lastname }}<br /><span>{{
+            user.nikname
+          }}</span>
+          <br />
+          <span>{{ user.city }}</span>
+        </figcaption>
+      </figure>
+      <aside class="car-info">
+        <h3 class="title">Car spec's</h3>
+        <ul class="specs">
+          <li>
+            <span class="text">
+              <a href="#">BRAND: {{ user.brand }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="mailto:senanven@gmail.com">MODEL: {{ user.model }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="mailto:senanven@gmail.com"
+                >BODE TYPE: {{ user.bodyType }}</a
+              >
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="https://github.com/AndriiSen">YEAR: {{ user.year }}</a>
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="linkedin.com/in/andrii-sen-468b68216"
+                >ENGINE: {{ user.engineVolume }}</a
+              >
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="linkedin.com/in/andrii-sen-468b68216"
+                >FUEL: {{ user.fuelType }}</a
+              >
+            </span>
+          </li>
+          <li>
+            <span class="text">
+              <a href="">TRANSMISSION: {{ user.transmission }}</a>
+            </span>
+          </li>
+        </ul>
+      </aside>
     </div>
-    <div class="hobbies">
-      <h3>Hobbies</h3>
-      <mat-divider></mat-divider>
-      <ul class="hobbies-list">
-        <li>Acroyoga</li>
-        <li>Genealogy</li>
-        <li>Puzzles</li>
-        <li>Reading</li>
-      </ul>
-    </div>
-  </div>
-  <div class="right-conteiner">
-    <div class="profile-header-section">
-      <h1>Some Dude</h1>
-      <h3 class="short-description">Writing and blogging.</h3>
-      <mat-icon>location_on</mat-icon>
-      <span>Odessa</span>
-      <div class="buttons">
-        <button mat-stroked-button color="primary" matBadge="4">
-          <mat-icon>thumb_up_alt</mat-icon> <span>Likes</span>
-        </button>
-        <button mat-stroked-button color="primary">
-          <mat-icon>share</mat-icon> <span>Share</span>
-        </button>
-        <button mat-stroked-button color="primary">
-          <mat-icon> message</mat-icon> <span>Send message</span>
-        </button>
-        <button mat-flat-button color="primary" *ngIf="isAuthorized" routerLink="/user/{{idFromUrl}}/update">
-          <mat-icon>check_circle</mat-icon> <span> Edit </span>
-        </button>
+    <div class="right-side">
+      <div class="about">
+        <h2 class="about-title">Purchase Story</h2>
+        <p class="purchase-story" [ngClass]="showText ? 'show' : 'hide'">
+          {{ user.purchaseStory }}
+        </p>
+        <button mat-button (click)="readMore()">...</button>
       </div>
-      <div class="about-section">
-        <mat-tab-group>
-          <mat-tab label="About"
-            ><p class="about-me-text">{{ aboutMe }}</p></mat-tab
-          >
-          <mat-tab label="Contacts">
-            <div class="contacts-section">
-              <div class="phone">
-                <h4>Phone:</h4>
-                <a href="tel:+380935885091"> +380935885091 </a>
-              </div>
-              <div class="address">
-                <h4>Address:</h4>
-                <span>Odessa, tratata street 47</span>
-              </div>
-              <div class="email">
-                <h4>Email:</h4>
-                <a href="mailto:andriysen20@gmail.com">andriysen20@gmail.com</a>
-              </div>
-              <div class="site">
-                <h4>Site:</h4>
-                <a href="https://github.com/AndriiSen/Ni-hao-resurrection"
-                  >GitHub</a
-                >
-              </div>
-            </div>
-          </mat-tab>
-        </mat-tab-group>
+      <div class="about">
+        <h2 class="about-title">tuning Style</h2>
+        <div class="box">
+          <div class="text">
+            <h4>{{ user.tuningStyle }}</h4>
+          </div>
+        </div>
       </div>
+      <button
+        mat-raised-button
+        color="primary"
+        *ngIf="isAuthorized"
+        routerLink="/user/{{ userId }}/update"
+      >
+        Edit Profile
+      </button>
     </div>
   </div>
 </div>
