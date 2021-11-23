@@ -1,11 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" [routerLink]="['register']" routerLinkActive="active">Register</a>
-          </li>
-        </ul>
-      </div>
+  <div class="navboard">
+    <div class="register" [routerLink]="['register']" routerLinkActive="active">Register</div>
+    <div class="login">Sign In</div>
+    <div class="token"></div>
+  </div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+    <h1 class="login_title">Login</h1>
+    <a class="close"></a>
+  <div id="errors" name="fname"></div>
+    <div class="form_group">
+      <input formControlName="email" class="email" placeholder=" ">
+      <label class="form_label">Email</label>
     </div>
-  </nav>
+    <div class="form_group">
+      <input type="password" formControlName="password" class="password" placeholder=" ">
+      <label class="form_label">Password</label>
+    </div>
+    <button class="closeBtn">Close</button>
+    <button type="submit" [routerLink]="['home-page']" routerLinkActive="active" class="sign_in">Sign In</button>
+  </form>
+
+  <div class="modal_bg">
+    </div>

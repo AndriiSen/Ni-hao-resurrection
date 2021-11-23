@@ -4,6 +4,9 @@ import { ColumnOneComponent } from './layouts/column-one/column-one.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HomePageComponent } from './components/home-page/home-page.component';
+
 
 
 
@@ -11,14 +14,19 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
   declarations: [
     ColumnOneComponent,
     HeaderComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomePageComponent
   ],
   imports: [
     CommonModule,
     RouterModule,
+    FormsModule,
+        ReactiveFormsModule
   ],
   exports: [
-    ColumnOneComponent
+    ColumnOneComponent,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

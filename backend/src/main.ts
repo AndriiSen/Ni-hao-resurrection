@@ -10,7 +10,7 @@ async function bootstrap() {
     transform: true
   }));
   app.enableCors({
-    origin: process.env.FRONT_URL,
+   origin: process.env.FRONT_URL,
     credentials: true
   });
 
