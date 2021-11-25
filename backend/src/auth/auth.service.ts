@@ -30,8 +30,11 @@ export class AuthService {
         }
     }
 
-    async generateJwtToken(email: string): Promise<any> {
-        const jwtToken = await this.jwtService.signAsync({ email: email })
+    async generateJwtToken(email: string, id: string): Promise<any> {
+        const jwtToken = await this.jwtService.signAsync({ 
+            email: email,
+            id: id
+        })
         return jwtToken
     }
     
@@ -53,7 +56,7 @@ export class AuthService {
         });
     }
 
-    async updateUserInfo(userId: number, updateInfo: string): Promise<any> {
+    async updateUserInfo(userId: number, updateInfo: any): Promise<any> {
         return this.usersRepository.findOneAndUpdate( { userId }, updateInfo)
     }
 

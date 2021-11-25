@@ -6,6 +6,7 @@ import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { User } from "src/users/schemas/user.schema";
 import { UpdateUserDto } from "src/users/dto/update-user.dto";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
+import { UserIsUserGuard } from "src/guards/userIsUser.guard";
 
 
 
@@ -24,14 +25,15 @@ export class AuthController {
         return this.authService.getUserProfile(userId)
     }
 
-    @Get('auth/login')
+    @Post('auth/login')
     async validateAndLogin(@Body() loginUserDto: AuthUserDto, @Res() res: Response): Promise<any> {
         const user = await this.authService.validateAndLogin(loginUserDto.email, loginUserDto.password)
         if (!user) {
             throw new UnauthorizedException()
         }
-        const jwtToken = await this.authService.generateJwtToken(loginUserDto.email)
+        const jwtToken = await this.authService.generateJwtToken(loginUserDto.email, user.userData.userId)
         res.setHeader('Auth-Token', jwtToken)
+        res.setHeader('Access-Control-Expose-Headers', 'Auth-Token')
         return res.json(user)
     }
 
@@ -40,9 +42,9 @@ export class AuthController {
         return this.authService.createUser(createUserDto.email, createUserDto.login, createUserDto.password);
     }
 
-    @UseGuards(JwtAuthGuard)
+    @UseGuards(JwtAuthGuard, UserIsUserGuard)
     @Put('user/:id/update')
     async updateUserInfo(@Param('id') userId: number, @Body() updateUserDto: UpdateUserDto) {
-        return this.authService.updateUserInfo(userId, updateUserDto.userInfo)
+        return this.authService.updateUserInfo(userId, updateUserDto)
     }
 }

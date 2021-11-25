@@ -24,7 +24,7 @@ export class UsersRepository {
         return newUser.save()
     }
 
-    async findOneAndUpdate(userFilterQuery: FilterQuery<User>, updateInfo: string): Promise<User> {
+    async findOneAndUpdate(userFilterQuery: FilterQuery<User>, updateInfo: any): Promise<User> {
         return this.userModel.findOneAndUpdate(userFilterQuery, { userInfo: updateInfo });
     }
 }
