@@ -1,30 +1,22 @@
-import { Injectable, Injector } from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
   HttpEvent,
+  HttpHandler,
   HttpInterceptor,
-  HttpResponse,
+  HttpRequest,
 } from '@angular/common/http';
 import { UserAuthorizationService } from './shared/services/user-authorization.service';
-import { Router } from '@angular/router';
-import 'rxjs/add/operator/do';
-
+import { Observable } from 'rxjs';
 @Injectable()
 export class TokenInterceptorService implements HttpInterceptor {
-  constructor(private injector: Injector, public router: Router) {}
+  constructor(private auth: UserAuthorizationService) {}
 
-  intercept(req, next) {
-    let authService = this.injector.get(UserAuthorizationService);
-    const started = Date.now();
+  intercept(req: HttpRequest<any>,next: HttpHandler): Observable<HttpEvent<any>> {
     let tokenizedReq = req.clone({
       setHeaders: {
-        Authorization: `bearer + ${authService.getToken()}`,
+        Authorization: `Bearer ${this.auth.getToken()}`,
       },
     });
-
-    return next.handle(tokenizedReq).do((event: HttpEvent<any>) => {
-      if (event instanceof HttpResponse) {
-        const elapsed = Date.now() - started;
-      }
-    });
+    return next.handle(tokenizedReq);
   }
 }

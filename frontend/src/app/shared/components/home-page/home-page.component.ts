@@ -11,14 +11,6 @@ export class HomePageComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    let regButton: any = document.querySelector('.register');
-    let loginButton: any = document.querySelector('.login');
-    function updateHeader () {
-      regButton.classList.add('remove');
-      loginButton.classList.add('remove');
-
-    }
-    updateHeader  ();
   }
 
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserAuthorizationService } from '../../../shared/services/user-authorization.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { first } from 'rxjs/operators';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -12,8 +12,10 @@ import { first } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private svc: UserAuthorizationService
+    private svc: UserAuthorizationService,
+    private router: Router,
   ) {}
+  show: boolean = true;
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
     password: [
@@ -25,48 +27,26 @@ export class HeaderComponent implements OnInit {
       ],
     ],
   });
+  @ViewChild('logForm') logForm;
+  @ViewChild('bg') bg;
 
-  ngOnInit(): void {
-    let modal: any = document.querySelector('.form');
-    let modalBg: any = document.querySelector('.modal_bg');
-    let login: any = document.querySelector('.login');
-
-    login.addEventListener('click', function () {
-      modal.classList.add('show');
-      modalBg.classList.add('show');
-    });
-
-    document.addEventListener('click', function (e) {
-      let click: any = e.target as HTMLTextAreaElement;
-      if (click.classList.value === 'close') {
-        modal.classList.remove('show');
-        modalBg.classList.remove('show');
-      }
-    });
-
-    document.addEventListener('click', function (e) {
-      let click: any = e.target as HTMLTextAreaElement;
-      if (click.classList.value === 'closeBtn') {
-        modal.classList.remove('show');
-        modalBg.classList.remove('show');
-      }
-    });
-
-    modalBg.addEventListener('click', function () {
-      modal.classList.remove('show');
-      modalBg.classList.remove('show');
-    });
+  clickSignIn(){
+    this.logForm.nativeElement.classList.add('show');
+    this.bg.nativeElement.classList.add('show');
   }
 
+  clickCloseModalWindow(){
+    this.logForm.nativeElement.classList.remove('show');
+    this.bg.nativeElement.classList.remove('show');
+  }
+
+  ngOnInit(): void {
+  }
+  @ViewChild('nameError') nameError;
   onSubmit() {
-    const element: HTMLElement = document.getElementById(
-      'errors'
-    ) as HTMLElement;
-    const errorMessage: string =
-      ' Unable to sign in. Invalid email or password';
+    const errorMessage: string =' Unable to sign in. Invalid email or password';
     if (this.loginForm.status === 'INVALID') {
-      element.innerHTML = errorMessage;
-      console.log(this.loginForm.status);
+      this.nameError.nativeElement.textContent = errorMessage;
     } else {
     this.svc
       .sendLoginForm(this.loginForm.value)
@@ -74,12 +54,13 @@ export class HeaderComponent implements OnInit {
       .subscribe(
         (data: any) => {
           if (data.status === 201) {
+            this.show = false;
             localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'));
-            window.location.href = '../home-page';
-          }
+            this.router.navigate(['/home-page']);
+          } 
         },
         (err: HttpErrorResponse) => {
-          element.innerHTML = errorMessage;
+          this.nameError.nativeElement.textContent = errorMessage;
         }
       );
     }

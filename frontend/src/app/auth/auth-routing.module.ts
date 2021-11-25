@@ -7,13 +7,15 @@ import { HomePageComponent } from '../shared/components/home-page/home-page.comp
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'home-page', component: HomePageComponent},
-  { path: '**', component: PageNotFoundComponent},
- 
-
+  { path: '**', component: PageNotFoundComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  imports: [
+    RouterModule.forChild(routes)
+  ],
+  exports: [
+    RouterModule
+  ]
 })
 export class AuthRoutingModule { }

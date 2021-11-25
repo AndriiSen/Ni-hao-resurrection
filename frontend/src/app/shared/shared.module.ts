@@ -1,21 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ColumnOneComponent } from './layouts/column-one/column-one.component';
 import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePageComponent } from './components/home-page/home-page.component';
 
-
-
-
 @NgModule({
   declarations: [
-    ColumnOneComponent,
     HeaderComponent,
     PageNotFoundComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     CommonModule,
@@ -24,9 +19,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
         ReactiveFormsModule
   ],
   exports: [
-    ColumnOneComponent,
+    HeaderComponent,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ]
 })
 export class SharedModule { }
