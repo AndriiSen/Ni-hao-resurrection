@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { of, Subscription } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
 
 
@@ -24,8 +24,8 @@ export class UserProfileComponent implements OnInit {
       this.svc.getUserInfo(this.userId).pipe(
         map((user: any) => {
           this.user = user
-          console.log(user)
-        })
+        }),
+        catchError(res => of(alert('User not found')))
       ).subscribe();
     });
   }

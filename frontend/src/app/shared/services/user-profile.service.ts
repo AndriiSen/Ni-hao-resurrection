@@ -8,22 +8,14 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserProfileService {
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json'
-    })
-  }
 
   constructor(private http: HttpClient) { }
 
   updateUserInfo(form: any, id: number) {
-    const backEndpoint = `http://localhost:3000/api/user/${id}/update`
-    return this.http.put(backEndpoint, form, this.httpOptions);
+    return this.http.put(`http://localhost:3000/api/user/${id}/update`, form);
   }
 
   getUserInfo(id: number): Observable<any> {
-    return this.http.get('http://localhost:3000/api/user/' + id).pipe(
-      map((user: any) => user)
-    );
+    return this.http.get(`http://localhost:3000/api/user/${id}`);
   }
 }
