@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserAuthorizationService } from '../../../shared/services/user-authorization.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-header',
@@ -50,7 +49,6 @@ export class HeaderComponent implements OnInit {
     } else {
     this.svc
       .sendLoginForm(this.loginForm.value)
-      .pipe(first())
       .subscribe(
         (data: any) => {
           if (data.status === 201) {
