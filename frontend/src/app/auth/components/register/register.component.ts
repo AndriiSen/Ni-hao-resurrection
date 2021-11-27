@@ -43,11 +43,6 @@ export class RegisterComponent implements OnInit {
       .subscribe(
         (data: any) => {
           localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'))
-          console.log(
-            JSON.parse(
-              atob(localStorage.getItem('Auth-Token')!.split('.')[1])
-            )
-          );
         });
   }
 }

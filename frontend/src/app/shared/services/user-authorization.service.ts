@@ -1,30 +1,36 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserAuthorizationService {
-  url: string = 'http://localhost:3000/api/auth/login';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      'Authorization': 'my-auth-token'
-    })
-  };
+
 
   constructor(private http: HttpClient) { }
 
+  private token;
+
   sendRegForm(form: any) {
-    return this.http.post(this.url, form);
+    return this.http.post('http://localhost:3000/api/auth/register', form);
   }
 
+
   sendLoginForm(form: any) {
-    return this.http.post<any>('http://localhost:3000/api/auth/login', form, { observe: 'response'}).pipe(
-      map(user => {
-      return user;
- }))
+    return this.http
+      .post<any>('http://localhost:3000/api/auth/login', form, {
+        observe: 'response',
+      })
+      .pipe(
+        map((user) => {
+          this.token = user.headers.get('Auth-token')
+          return user;
+        })
+      );
+  }
+
+  getToken() {
+    return localStorage.getItem('Auth-Token')
   }
 }

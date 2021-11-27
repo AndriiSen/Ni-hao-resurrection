@@ -35,7 +35,7 @@ export class User {
     @Prop()
     date: string;
 
-    @Prop({ type: Object})
+    @Prop({ type: Object })
     userInfo?: IUpdateUserInfo;
 }
 

@@ -18,7 +18,7 @@ export class UserIsUserGuard implements CanActivate {
         const userFromRequest = request.user;
         const id = userFromRequest.id;
         let hasPermissions: boolean;
-        if(paramsId === id) {
+        if (paramsId === id) {
             hasPermissions = true;
         } else {
             hasPermissions = false

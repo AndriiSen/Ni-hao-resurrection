@@ -11,9 +11,6 @@ import { UserIsUserGuard } from "src/guards/userIsUser.guard";
 
 
 
-
-
-
 @Controller()
 export class AuthController {
     constructor(
@@ -21,7 +18,12 @@ export class AuthController {
     ) { };
 
     @Get('user/:id')
-    async getUserProfile(@Param('id') userId: number ) {
+    async getUserProfile(@Param('id') userId: number) {
+        return this.authService.getUserProfile(userId)
+    }
+    @UseGuards(JwtAuthGuard, UserIsUserGuard)
+    @Get('user/:id/update')
+    async getUserInfoToUpdate(@Param('id') userId: number) {
         return this.authService.getUserProfile(userId)
     }
 

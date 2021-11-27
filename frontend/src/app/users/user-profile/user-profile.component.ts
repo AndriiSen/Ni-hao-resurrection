@@ -27,6 +27,10 @@ export class UserProfileComponent implements OnInit {
         }),
         catchError(res => of(alert('User not found')))
       ).subscribe();
+      this.svc.getUserInfoToUpdate(this.userId).pipe(
+        catchError(res => of(this.isAuthorized = false)
+        )
+      ).subscribe();
     });
   }
 

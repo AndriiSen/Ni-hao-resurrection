@@ -1,11 +1,46 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" [routerLink]="['register']" routerLinkActive="active">Register</a>
-          </li>
-        </ul>
-      </div>
+<div class="navboard">
+  <div class="auth">
+    <div *ngIf="show" class="register" [routerLink]="['register']">
+      Register
     </div>
-  </nav>
+    <div *ngIf="show" (click)="clickSignIn()" class="login">Sign In</div>
+  </div>
+
+  <button
+    routerLink="/user/{{ user.userId }}"
+    mat-raised-button
+    *ngIf="isAuthorized"
+  >
+    {{ user.userInfo.name }} {{ user.userInfo.lastname }}
+  </button>
+</div>
+
+<form #logForm [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="form">
+  <h1 class="login_title">Login</h1>
+  <a (click)="clickCloseModalWindow()" class="close"></a>
+  <div #nameError id="errors" name="fname"></div>
+  <div class="form_group">
+    <input formControlName="email" class="email" placeholder=" " />
+    <label class="form_label">Email</label>
+  </div>
+  <div class="form_group">
+    <input
+      type="password"
+      formControlName="password"
+      class="password"
+      placeholder=" "
+    />
+    <label class="form_label">Password</label>
+  </div>
+  <button (click)="clickCloseModalWindow()" class="closeBtn">Close</button>
+  <button
+    type="submit"
+    [routerLink]="['home-page']"
+    routerLinkActive="active"
+    class="sign_in"
+  >
+    Sign In
+  </button>
+</form>
+
+<div #bg class="modal_bg" (click)="clickCloseModalWindow()"></div>

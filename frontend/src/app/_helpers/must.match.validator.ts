@@ -13,7 +13,7 @@ export function MustMatch(password: string, passwordComfirm: string) {
         // set error on matchingControl if validation fails
         if (control.value !== matchingControl.value) {
             matchingControl.setErrors({ mustMatch: true })
-            console.log();
+
         } else {
             matchingControl.setErrors(null);
         }
