@@ -7,22 +7,50 @@
   font-family: "Nunito Sans", sans-serif;
 }
 
+mat-sidenav-container {
+  height: 100%;
+}
+
+mat-sidenav {
+  width: 200px;
+  background-color: rgb(255, 226, 241);
+}
+mat-sidenav button {
+  width: 100%;
+  text-align: left;
+}
+
 .conteiner {
   position: relative;
   margin: auto;
   width: 100%;
   max-width: 980px;
-  min-height: 900px;
-  background: #fff;
+  height: 100vh;
   display: grid;
   grid-template-columns: 1fr 2fr;
-  box-shadow: 0 40px 50px rgba(0, 0, 0, 0.3);
+}
+.width-container {
+  margin: auto;
+  width: 100%;
+  max-width: 980px;
+  height: 100vh;
+  box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+    rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
 }
 
 .conteiner .left-side {
   position: relative;
   background: rgb(6, 26, 53);
-  padding: 40px;
+  padding: 0px 40px 40px 40px;
+}
+
+.actions {
+  margin: 10px;
+}
+
+.actions button {
+  color: #fff;
+  margin-right: 5px;
 }
 
 .left-side figure {
@@ -141,5 +169,16 @@
     margin: 0px;
     display: flex;
     flex-direction: column;
+  }
+}
+
+@media (max-width: 600px) {
+  .conteiner {
+    width: 95%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .figure {
+    width: 90%;
   }
 }

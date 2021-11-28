@@ -1,90 +1,108 @@
-<div *ngIf="user">
-  <div class="conteiner">
-    <div class="left-side">
-      <figure class="main-info">
-        <img
-          src="https://a.d-cd.net/16AB4DWS8GpmXYucXhko0sMYzis-1920.jpg"
-          alt="Car photo"
-        />
-        <figcaption>
-          {{ user.name }} {{ user.lastname }}<br /><span>{{
-            user.nikname
-          }}</span>
-          <br />
-          <span>{{ user.city }}</span>
-        </figcaption>
-      </figure>
-      <aside class="car-info">
-        <h3 class="title">Car spec's</h3>
-        <ul class="specs">
-          <li>
-            <span class="text">
-              <a href="#">BRAND: {{ user.brand }}</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="mailto:senanven@gmail.com">MODEL: {{ user.model }}</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="mailto:senanven@gmail.com"
-                >BODE TYPE: {{ user.bodyType }}</a
-              >
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="https://github.com/AndriiSen">YEAR: {{ user.year }}</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="linkedin.com/in/andrii-sen-468b68216"
-                >ENGINE: {{ user.engineVolume }}</a
-              >
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="linkedin.com/in/andrii-sen-468b68216"
-                >FUEL: {{ user.fuelType }}</a
-              >
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="">TRANSMISSION: {{ user.transmission }}</a>
-            </span>
-          </li>
-        </ul>
-      </aside>
-    </div>
-    <div class="right-side">
-      <div class="about">
-        <h2 class="about-title">Purchase Story</h2>
-        <p class="purchase-story" [ngClass]="showText ? 'show' : 'hide'">
-          {{ user.purchaseStory }}
-        </p>
-        <button mat-button (click)="readMore()">...</button>
-      </div>
-      <div class="about">
-        <h2 class="about-title">tuning Style</h2>
-        <div class="box">
-          <div class="text">
-            <h4>{{ user.tuningStyle }}</h4>
+<div *ngIf="user" class="width-container">
+  <mat-sidenav-container>
+    <mat-sidenav [(opened)]="navOpened"> 
+      <button mat-button><mat-icon>search</mat-icon> Find car bro's</button>
+      <button mat-button><mat-icon>people</mat-icon> Friends</button>
+      <button mat-button><mat-icon>message</mat-icon> Messages</button>
+      <button mat-button><mat-icon>event_note</mat-icon> Events</button>
+      <button mat-button><mat-icon>settings</mat-icon> Settings</button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="conteiner">
+        <div class="left-side">
+          <div class="actions">
+            <button mat-stroked-button color="primary" (click)="navOpened = !navOpened">
+              <mat-icon>menu</mat-icon>
+              Menu
+            </button>
+            <button mat-stroked-button color="primary" *ngIf="isAuthorized" routerLink="/user/{{ userId }}/update">
+              <mat-icon>edit</mat-icon>
+              Edit Profile
+            </button>
+          </div>
+          <figure class="main-info">
+            <img
+              class="car-photo"
+              src="https://a.d-cd.net/16AB4DWS8GpmXYucXhko0sMYzis-1920.jpg"
+              alt="Car photo"
+            />
+            <figcaption>
+              {{ user.name }} {{ user.lastname }}<br /><span>{{
+                user.nikname
+              }}</span>
+              <br />
+              <span>{{ user.city }}</span>
+            </figcaption>
+          </figure>
+          <aside class="car-info">
+            <h3 class="title">Car spec's</h3>
+            <ul class="specs">
+              <li>
+                <span class="text">
+                  <a href="#">BRAND: {{ user.brand }}</a>
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="mailto:senanven@gmail.com"
+                    >MODEL: {{ user.model }}</a
+                  >
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="mailto:senanven@gmail.com"
+                    >BODE TYPE: {{ user.bodyType }}</a
+                  >
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="https://github.com/AndriiSen"
+                    >YEAR: {{ user.year }}</a
+                  >
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="linkedin.com/in/andrii-sen-468b68216"
+                    >ENGINE: {{ user.engineVolume }}</a
+                  >
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="linkedin.com/in/andrii-sen-468b68216"
+                    >FUEL: {{ user.fuelType }}</a
+                  >
+                </span>
+              </li>
+              <li>
+                <span class="text">
+                  <a href="">TRANSMISSION: {{ user.transmission }}</a>
+                </span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+        <div class="right-side">
+          <div class="about">
+            <h2 class="about-title">Purchase Story</h2>
+            <p class="purchase-story" [ngClass]="showText ? 'show' : 'hide'">
+              {{ user.purchaseStory }}
+            </p>
+            <button mat-button (click)="readMore()">...</button>
+          </div>
+          <div class="about">
+            <h2 class="about-title">tuning Style</h2>
+            <div class="box">
+              <div class="text">
+                <h4>{{ user.tuningStyle }}</h4>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <button
-        mat-raised-button
-        color="primary"
-        *ngIf="isAuthorized"
-        routerLink="/user/{{ userId }}/update"
-      >
-        Edit Profile
-      </button>
-    </div>
-  </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 </div>

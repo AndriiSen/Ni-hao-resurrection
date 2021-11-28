@@ -11,6 +11,7 @@ import { UserProfileService } from 'src/app/shared/services/user-profile.service
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
+  navOpened = false;
   isAuthorized: boolean = true;
   showText: boolean = false;
   userId!: number;
@@ -38,6 +39,9 @@ export class UserProfileComponent implements OnInit {
     this.showText = !this.showText;
   }
 
+  openSidenav(): void {
+    this.navOpened = true;
+  }
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }
