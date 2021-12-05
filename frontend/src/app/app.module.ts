@@ -11,12 +11,14 @@ import { UpdateProfileComponent } from './users/update-profile/update-profile.co
 import { RouterModule } from '@angular/router';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { FormsModule } from '@angular/forms';
+import { FindUsersComponent } from './users/find-users/find-users.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     UserProfileComponent,
-    UpdateProfileComponent
+    UpdateProfileComponent,
+    FindUsersComponent,
   ],
   imports: [
     BrowserModule,

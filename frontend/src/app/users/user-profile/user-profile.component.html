@@ -1,7 +1,7 @@
 <div *ngIf="user" class="width-container">
   <mat-sidenav-container>
     <mat-sidenav [(opened)]="navOpened"> 
-      <button mat-button><mat-icon>search</mat-icon> Find car bro's</button>
+      <button mat-button routerLink="/users/find"><mat-icon>search</mat-icon>Find car bro's</button>
       <button mat-button><mat-icon>people</mat-icon> Friends</button>
       <button mat-button><mat-icon>message</mat-icon> Messages</button>
       <button mat-button><mat-icon>event_note</mat-icon> Events</button>

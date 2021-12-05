@@ -21,4 +21,8 @@ export class UserProfileService {
   getUserInfoToUpdate(id: number): Observable<any> {
     return this.http.get(`http://localhost:3000/api/user/${id}/update`);
   }
+
+  getAllUsers(): Observable<any> {
+    return this.http.get('http://localhost:3000/api/users')
+  }
 }

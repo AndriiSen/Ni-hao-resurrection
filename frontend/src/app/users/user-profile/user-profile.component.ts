@@ -39,9 +39,6 @@ export class UserProfileComponent implements OnInit {
     this.showText = !this.showText;
   }
 
-  openSidenav(): void {
-    this.navOpened = true;
-  }
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }

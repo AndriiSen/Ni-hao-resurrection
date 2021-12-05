@@ -30,6 +30,10 @@ export class UserAuthorizationService {
       );
   }
 
+  getAllUsers() {
+    return true
+  }
+  
   getToken() {
     return localStorage.getItem('Auth-Token')
   }
