@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
-
+import { UserAuthorizationService } from 'src/app/shared/services/user-authorization.service'
 
 @Component({
   selector: 'app-user-profile',
@@ -16,21 +17,16 @@ export class UserProfileComponent implements OnInit {
   userId!: number;
   user: any;
   private routeSub!: Subscription;
-  constructor(private route: ActivatedRoute, public svc: UserProfileService) { }
+  constructor(private route: ActivatedRoute, public userProfileService: UserProfileService, private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       this.userId = parseInt(params['id']);
-      this.svc.getUserInfo(this.userId).pipe(
-        map((user: any) => {
-          this.user = user
-        }),
-        catchError(res => of(alert('User not found')))
-      ).subscribe();
-      this.svc.getUserInfoToUpdate(this.userId).pipe(
-        catchError(res => of(this.isAuthorized = false)
-        )
-      ).subscribe();
+      this.userProfileService.getUserInfo(this.userId).pipe(
+        catchError(res => of(this.snackBar.open('User not found')))
+      ).subscribe((user: any) => {
+        this.user = user
+      });
     });
   }
 

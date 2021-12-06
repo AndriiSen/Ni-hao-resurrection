@@ -6,7 +6,7 @@ import { UserProfileComponent } from './users/user-profile/user-profile.componen
 
 const routes: Routes = [
   { path: 'user/:id', component: UserProfileComponent },
-  { path: 'user/:id/update', component: UpdateProfileComponent }
+  { path: 'updateProfile', component: UpdateProfileComponent }
 ];
 
 @NgModule({

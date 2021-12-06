@@ -5,6 +5,9 @@ import { of, Subscription } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import jwt_decode from 'jwt-decode';
+import { UserAuthorizationService } from 'src/app/shared/services/user-authorization.service';
+
 
 @Component({
   selector: 'app-update-profile',
@@ -12,51 +15,43 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   styleUrls: ['./update-profile.component.css']
 })
 export class UpdateProfileComponent implements OnInit {
-  public userId!: number
   private routeSub!: Subscription;
   user!: any;
+  decoded: any;
+  token;
 
-  constructor(private router: Router, private svc: UserProfileService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
+  constructor(private router: Router, private userAuthService: UserAuthorizationService, private userProfileService: UserProfileService, private route: ActivatedRoute, private snackBar: MatSnackBar) { }
   userInfo = new FormGroup({
     name: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
-    nikname: new FormControl('', Validators.required),
+    middlename: new FormControl('', Validators.required),
     district: new FormControl('', Validators.required),
     city: new FormControl(''),
-    tuningStyle: new FormControl(''),
-    bodyType: new FormControl(''),
-    brand: new FormControl(''),
-    model: new FormControl(''),
-    year: new FormControl(''),
-    fuelType: new FormControl(''),
-    transmission: new FormControl(''),
-    engineVolume: new FormControl(''),
-    purchaseStory: new FormControl(''),
+    phone: new FormControl(''),
+    gitHub: new FormControl(''),
+    linkedIn: new FormControl(''),
+    about: new FormControl(''),
   });
 
   ngOnInit(): void {
-    this.routeSub = this.route.params.subscribe(params => {
-      this.userId = parseInt(params['id']);
-    });
-    this.svc.getUserInfoToUpdate(this.userId).pipe(
+    this.token = localStorage.getItem('Auth-Token')
+    this.decoded = jwt_decode(this.token)
+    console.log(this.decoded.id)
+    this.userProfileService.getUserInfo(this.decoded.id).pipe(
       map((user: any) => {
         this.user = user
         if (this.user) {
           this.userInfo.patchValue({
             name: this.user.name,
             lastname: this.user.lastname,
-            nikname: this.user.nikname,
+            middlename: this.user.middlename,
             district: this.user.district,
             city: this.user.city,
-            tuningStyle: this.user.tuningStyle,
-            bodyType: this.user.bodyType,
-            brand: this.user.brand,
-            model: this.user.model,
-            year: this.user.year,
-            fuelType: this.user.fuelType,
-            transmission: this.user.transmission,
-            engineVolume: this.user.engineVolume,
-            purchaseStory: this.user.purchaseStory
+            interests: this.user.interests,
+            about: this.user.about,
+            phone: this.user.phone,
+            gitHub: this.user.gitHub,
+            linkedIn: this.user.linkedIn
           })
         }
       }),
@@ -69,7 +64,7 @@ export class UpdateProfileComponent implements OnInit {
 
   }
   onSubmit(): void {
-    this.svc.updateUserInfo(this.userInfo.value, this.userId).pipe(
+    this.userProfileService.updateUserInfo(this.userInfo.value, this.decoded.id).pipe(
       map(() => this.openSnackBar('Successfully updated')),
       catchError(res => of(this.openSnackBar(res.error.message)))
     ).subscribe();

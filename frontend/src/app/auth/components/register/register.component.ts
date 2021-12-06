@@ -13,7 +13,7 @@ import { UserAuthorizationService } from '../../../shared/services/user-authoriz
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private svc: UserAuthorizationService) { };
+  constructor(private formBuilder: FormBuilder, private userAuthService: UserAuthorizationService) { };
 
   userForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -35,11 +35,11 @@ export class RegisterComponent implements OnInit {
   ngOnInit(): void { }
 
   onSubmit() {
-    this.svc.sendRegForm(this.userForm.value).subscribe();
+    this.userAuthService.sendRegForm(this.userForm.value).subscribe();
   }
 
   login() {
-    this.svc.sendLoginForm(this.loginForm.value).pipe(first())
+    this.userAuthService.sendLoginForm(this.loginForm.value).pipe(first())
       .subscribe(
         (data: any) => {
           localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'))

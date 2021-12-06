@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
-    private svc: UserAuthorizationService,
+    private userAuthService: UserAuthorizationService,
     private router: Router,
   ) { }
   show: boolean = true;
@@ -50,7 +50,7 @@ export class HeaderComponent implements OnInit {
     if (this.loginForm.status === 'INVALID') {
       this.nameError.nativeElement.textContent = errorMessage;
     } else {
-      this.svc
+      this.userAuthService
         .sendLoginForm(this.loginForm.value)
         .subscribe(
           (data: any) => {
@@ -71,6 +71,6 @@ export class HeaderComponent implements OnInit {
   }
 
   navigateToProfile() {
-    this.router.navigate(['user/29'])
+    this.router.navigate([`user/${this.user.userInfo.userId}`])
   }
 }
