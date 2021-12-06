@@ -30,9 +30,8 @@ export class AuthService {
       userData: user,
     };
   }
-  async generateJwtToken(email: string, id: string): Promise<any> {
+  async generateJwtToken(id: string): Promise<any> {
     const jwtToken = await this.jwtService.signAsync({
-      email: email,
       id: id
     })
     return jwtToken
@@ -66,5 +65,9 @@ export class AuthService {
       throw new BadRequestException('Invalid user')
     }
     return user.userInfo
+  }
+
+  async getAllUsers() {
+    return this.usersRepository.find({})
   }
 }

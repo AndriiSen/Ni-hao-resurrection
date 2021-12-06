@@ -1,16 +1,10 @@
 export class UpdateUserDto {
+    id: number
     name: string
     lastname: string
-    nikname: string
+    middlename: string
     district: string
     city: string
-    tuningStyle: string
-    bodyType: string
-    brand: string
-    model: string
-    year: string
-    fuelType: string
-    transmission: string
-    engineVolume: string
-    purchaseStory: string
+    interests: string
+    about: string
 }
