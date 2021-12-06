@@ -1,69 +1,119 @@
 <div *ngIf="user">
   <div class="conteiner">
-    <div class="left-side">
-      <figure class="main-info">
-        <img
-          src="https://a.d-cd.net/16AB4DWS8GpmXYucXhko0sMYzis-1920.jpg"
-          alt="Car photo"
-        />
-        <figcaption>
-          {{ user.name }} {{ user.lastname }}<br /><span>{{
-            user.nikname
-          }}</span>
-          <br />
-          <span>{{ user.city }}</span>
-        </figcaption>
-      </figure>
-      <aside class="car-info">
-        <h3 class="title">Contacts</h3>
-        <ul class="specs">
-          <li>
-            <span class="text">
-              <a href="tel:+380935885091">+380935885091</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="https://github.com/AndriiSen">GitHub</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="linkedin.com/in/andrii-sen-468b68216">LinkedIn</a>
-            </span>
-          </li>
-          <li>
-            <span class="text">
-              <a href="mailto:senanven@gmail.com">senanven@gmail.com</a>
-            </span>
-          </li>
-        </ul>
-      </aside>
-    </div>
-    <div class="right-side">
-      <div class="about">
-        <h2 class="about-title">About</h2>
-        <p class="purchase-story" [ngClass]="showText ? 'show' : 'hide'">
-          {{ user.purchaseStory }}
-        </p>
-        <button mat-button (click)="readMore()">...</button>
-      </div>
-      <div class="about">
-        <h2 class="about-title">Interest's</h2>
-        <div class="box">
-          <div class="text">
-            <h4>{{ user.tuningStyle }}</h4>
-          </div>
-        </div>
-      </div>
+    <div class="profile-actions">
+      <button mat-mini-fab color="primary">
+        <mat-icon>more_vert</mat-icon>
+      </button>
       <button
-        mat-raised-button
+        mat-mini-fab
         color="primary"
         *ngIf="isAuthorized"
         routerLink="/updateProfile"
       >
-        Edit Profile
+        <mat-icon>edit</mat-icon>
       </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>message</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>person_add</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>share</mat-icon>
+      </button>
+    </div>
+    <mat-card class="main-card">
+      <div class="main-left">
+        <mat-card-title
+          >{{ user.userInfo.name }} {{ user.userInfo.lastname }}
+          {{ user.userInfo.middlename }}</mat-card-title
+        >
+        <mat-card-subtitle
+          ><mat-icon> location_on</mat-icon> {{ user.userInfo.district }},
+          {{ user.userInfo.city }}</mat-card-subtitle
+        >
+        <mat-card-content>
+          {{ user.userInfo.about }}
+        </mat-card-content>
+      </div>
+      <img
+        class="profile-img"
+        mat-card-lg-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      />
+    </mat-card>
+    <div class="friends-actions-comments">
+      <div class="left-side">
+        <mat-card class="contacts">
+          <mat-card-title> Contacts </mat-card-title>
+          <ul>
+            <li>
+              <a href="tel:{{ user.userInfo.phone }}">{{
+                user.userInfo.phone
+              }}</a>
+            </li>
+            <li>
+              <a href="mailto:{{ user.email }}" target="_blank">{{
+                user.email
+              }}</a>
+            </li>
+            <li>
+              <a href="{{ user.userInfo.gitHub }}" target="_blank">GitHub</a>
+            </li>
+            <li>
+              <a href="{{ user.userInfo.linkedIn }}" target="_blank"
+                >LinkedIn</a
+              >
+            </li>
+          </ul>
+        </mat-card>
+        <mat-card class="friends-card">
+          <mat-card-title> Friends </mat-card-title>
+          <div class="friends-list">
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+          </div>
+        </mat-card>
+      </div>
+      <div class="right-side">
+        <mat-card class="comments">
+          <mat-card-title> Comments section </mat-card-title>
+
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem quo
+          iusto error, cum deserunt fugiat nam dignissimos hic nemo tempora
+          accusantium dicta voluptatum vero voluptatibus quas soluta unde alias!
+          Labore ducimus rem illum nulla quas, porro eaque recusandae nesciunt
+          cupiditate fugit nostrum tenetur dolore ipsum harum unde architecto
+          dignissimos velit natus! Dolorum sunt odio repudiandae quia ea nulla?
+          Expedita, pariatur, eligendi quisquam accusamus error eos sed vel
+          tempore illum a vitae beatae. Soluta earum maiores doloribus adipisci
+          architecto assumenda unde odit molestias voluptatum ut reprehenderit
+          quaerat necessitatibus sequi nisi similique, dolores quo recusandae
+          ducimus. Adipisci maiores corporis alias numquam sint, deserunt enim
+          sequi provident sit. Fuga recusandae libero eius voluptatem ullam
+          distinctio natus? Asperiores provident beatae nostrum ab quaerat error
+          eaque, reprehenderit debitis consectetur nemo modi earum odio possimus
+          eos quam perferendis. Explicabo, perspiciatis vero ipsum eum amet
+          officia eos sequi aut officiis excepturi recusandae odit quaerat
+          deserunt repudiandae quidem blanditiis labore possimus facere
+          consequatur sed adipisci. Molestias aliquid officiis officia? Dolorum
+          quis veniam tempora quas quibusdam expedita possimus nam facere esse
+          dolores consequatur voluptatum deserunt ipsum velit impedit cumque,
+          recusandae laudantium, aliquid saepe. Alias assumenda temporibus
+          distinctio nisi quis. Placeat, expedita minus? Recusandae optio sint
+          nostrum unde ex nihil!
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>

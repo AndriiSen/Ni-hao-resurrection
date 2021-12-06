@@ -31,29 +31,12 @@
         <input matInput formControlName="gitHub" />
       </mat-form-field>
       <mat-form-field appearance="fill">
-        <mat-label>LenkedIn progile link</mat-label>
+        <mat-label>LenkedIn progife link</mat-label>
         <input matInput formControlName="linkedIn" />
       </mat-form-field>
-    </div>
-
-    <div class="car-info-section">
-      <h3>Car info</h3>
-      <mat-form-field appearance="fill">
-        <mat-label>Style</mat-label>
-        <mat-select formControlName="interests">
-          <mat-option value="JDM">JDM</mat-option>
-          <mat-option value="HOT ROD">HOT ROD</mat-option>
-        </mat-select>
-        <mat-hint align="end">Select your style</mat-hint>
-      </mat-form-field>
-     
       <mat-form-field appearance="fill">
         <mat-label>About</mat-label>
-        <textarea
-          matInput
-          class="buy-story"
-          formControlName="about"
-        ></textarea>
+        <textarea matInput class="buy-story" formControlName="about"></textarea>
       </mat-form-field>
       <button mat-raised-button color="primary" type="submit">
         Update profile

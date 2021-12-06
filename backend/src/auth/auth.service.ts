@@ -64,7 +64,7 @@ export class AuthService {
     if (!user) {
       throw new BadRequestException('Invalid user')
     }
-    return user.userInfo
+    return user
   }
 
   async getAllUsers() {

@@ -5,6 +5,8 @@ export class UpdateUserDto {
     middlename: string
     district: string
     city: string
-    interests: string
+    phone: string
+    gitHub: string
+    linkedIn: string
     about: string
 }

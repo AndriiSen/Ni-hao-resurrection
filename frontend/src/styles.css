@@ -1,3 +1,6 @@
 
-html, body { height: 100%; }
+html, body {
+    
+background: rgb(54,50,111);
+background: linear-gradient(180deg, rgba(54,50,111,0.055059523809523836) 0%, rgba(89,89,177,0.06066176470588236) 100%, rgba(0,212,255,1) 100%);}
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

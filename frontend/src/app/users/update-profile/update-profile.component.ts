@@ -42,16 +42,15 @@ export class UpdateProfileComponent implements OnInit {
         this.user = user
         if (this.user) {
           this.userInfo.patchValue({
-            name: this.user.name,
-            lastname: this.user.lastname,
-            middlename: this.user.middlename,
-            district: this.user.district,
-            city: this.user.city,
-            interests: this.user.interests,
-            about: this.user.about,
-            phone: this.user.phone,
-            gitHub: this.user.gitHub,
-            linkedIn: this.user.linkedIn
+            name: this.user.userInfo.name,
+            lastname: this.user.userInfo.lastname,
+            middlename: this.user.userInfo.middlename,
+            district: this.user.userInfo.district,
+            city: this.user.userInfo.city,
+            about: this.user.userInfo.about,
+            phone: this.user.userInfo.phone,
+            gitHub: this.user.userInfo.gitHub,
+            linkedIn: this.user.userInfo.linkedIn
           })
         }
       }),

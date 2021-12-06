@@ -26,6 +26,7 @@ export class UserProfileComponent implements OnInit {
         catchError(res => of(this.snackBar.open('User not found')))
       ).subscribe((user: any) => {
         this.user = user
+        console.log(this.user)
       });
     });
   }

@@ -1,145 +1,84 @@
-@import url("https://fonts.googleapis.com/css2?family=Azeret+Mono:wght@300;400;500;600;700;800&family=Nunito+Sans:wght@200;300;400;600;700;800;900&display=swap");
-
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
-  font-family: "Nunito Sans", sans-serif;
 }
 
 .conteiner {
-  position: relative;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: auto;
   width: 100%;
   max-width: 980px;
   min-height: 900px;
-  background: #fff;
+}
+
+mat-card {
+  margin: 3px;
+  border-radius: 10px;
+}
+.main-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.friends-actions-comments {
   display: grid;
   grid-template-columns: 1fr 2fr;
-  box-shadow: 0 40px 50px rgba(0, 0, 0, 0.3);
 }
 
-.conteiner .left-side {
-  position: relative;
-  background: rgb(6, 26, 53);
-  padding: 40px;
+.left-side .contacts ul li {
+  list-style: none;
+}
+.left-side .contacts ul li a {
+  text-decoration: none;
+  color: black;
 }
 
-.left-side figure {
+.friends-card {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding-bottom: 20px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-
-.left-side figure img {
-  position: relative;
-  height: 200px;
-}
-
-.left-side figcaption {
-  margin-top: 20px;
-  color: #fff;
-  font-size: 1.5em;
-  font-weight: 600;
-  text-transform: uppercase;
-  text-align: center;
-  line-height: 1.4em;
-}
-.left-side figcaption span {
-  font-size: 0.8em;
-  font-weight: 300;
-}
-
-.car-info {
-  padding-top: 40px;
-}
-
-.title {
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 1px;
-  margin-bottom: 20px;
-}
-
-.car-info {
-  position: relative;
-}
-.car-info ul li {
-  position: relative;
-  list-style: none;
-  margin: 10px 0;
-  cursor: pointer;
-}
-
-.car-info ul li span,
-.car-info ul li span a {
-  color: #fff;
-  text-decoration: none;
-}
-
-.car-info span {
-  cursor: default;
-}
-
-.conteiner .right-side {
-  padding: 100px 40px 40px 40px;
-}
-
-.about {
-  margin-bottom: 70px;
-}
-
-.about:last-child {
-  margin-bottom: 0;
-}
-
-.about-title {
-  color: rgb(6, 26, 53);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  font-weight: 800;
-  margin-bottom: 10px;
-}
-
-.purchase-story {
-  color: #333;
-  height: 200px;
-}
-
-.show {
-  overflow: visible;
-  height: auto;
-}
-
-.hide {
-  overflow: hidden;
-}
-
-.about .box {
+.friends-card .friends-list {
   display: flex;
-  flex-direction: row;
+  justify-content: space-around;
 }
 
-.about .box .tuning-style h5 {
-  text-transform: uppercase;
-  color: #848c90;
-  font-weight: 600;
+.friends-card img {
+  border-radius: 50%;
 }
 
-.about .box .text h4 {
-  text-transform: uppercase;
-  color: #2a7da2;
-  font-size: 16px;
+.profile-actions {
+  padding: 5px;
 }
 
-@media (max-width: 980px) {
-  .conteiner {
-    position: relative;
-    margin: 0px;
+.profile-actions button {
+  transition: 1s;
+  margin-left: 10px;
+}
+.profile-actions button:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+
+@media (max-width: 775px) {
+  .friends-actions-comments {
     display: flex;
     flex-direction: column;
+  }
+  .profile-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-card {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .main-left mat-card-title {
+    margin-top: 10px;
   }
 }
