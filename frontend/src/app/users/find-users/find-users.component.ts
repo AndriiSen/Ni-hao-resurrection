@@ -8,18 +8,16 @@ import { UserProfileService } from 'src/app/shared/services/user-profile.service
   styleUrls: ['./find-users.component.css']
 })
 export class FindUsersComponent implements OnInit {
-  usersList: any;
+  usersList = ['andrii', 'makar', 'sergio', 'gooote', 'ramada', 'jafar'];
 
-  constructor(private svc: UserProfileService) { }
+  constructor(private userProfileService: UserProfileService) { }
 
   ngOnInit(): void {
-    this.svc.getAllUsers().pipe(
-      map((data) => {
-        data.forEach(el => {
-          this.usersList.push(el.userInfo.name)
-        });
+    this.userProfileService.getAllUsers().subscribe(
+      data => {
+        this.usersList = data
         console.log(this.usersList)
-      })
-    ).subscribe()
+      }
+    )
   }
 }
