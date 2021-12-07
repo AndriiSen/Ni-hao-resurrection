@@ -7,6 +7,7 @@ import { User } from "src/users/schemas/user.schema";
 import { UpdateUserDto } from "src/users/dto/update-user.dto";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { UserIsUserGuard } from "src/guards/userIsUser.guard";
+import { UsersRepository } from "src/users/users.repository";
 
 
 
@@ -14,8 +15,12 @@ import { UserIsUserGuard } from "src/guards/userIsUser.guard";
 @Controller()
 export class AuthController {
     constructor(
-        private readonly authService: AuthService
+        private readonly authService: AuthService, private usersRepository: UsersRepository
     ) { };
+    @Get('/users')
+    async getAllUsers() {
+        return this.usersRepository.find({})
+    }
 
     @Get('user/:id')
     async getUserProfile(@Param('id') userId: number) {
