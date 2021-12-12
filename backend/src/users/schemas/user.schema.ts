@@ -5,18 +5,13 @@ export type UserDocument = User & Document
 interface IUpdateUserInfo {
     name: string,
     lastname: string,
-    nikname: string,
+    middlename: string,
     district: string,
     city: string,
-    tuningStyle: string,
-    bodyType: string,
-    brand: string,
-    model: string,
-    year: string,
-    fuelType: string,
-    transmission: string,
-    engineVolume: string,
-    purchaseStory: string,
+    phone: string,
+    gitHub: string,
+    linkedIn: string,
+    about: string,
 }
 @Schema()
 export class User {

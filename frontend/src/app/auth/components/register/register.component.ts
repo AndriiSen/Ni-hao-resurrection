@@ -39,10 +39,9 @@ export class RegisterComponent implements OnInit {
   }
 
   login() {
-    this.userAuthService.sendLoginForm(this.loginForm.value).pipe(first())
-      .subscribe(
-        (data: any) => {
-          localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'))
-        });
+    this.userAuthService.sendLoginForm(this.loginForm.value).subscribe(
+      (data: any) => {
+        localStorage.setItem('Auth-Token', data.headers.get('Auth-Token'))
+      });
   }
 }

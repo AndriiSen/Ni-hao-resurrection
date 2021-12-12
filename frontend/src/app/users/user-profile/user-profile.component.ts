@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
 import { of, Subscription } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
-import { UserAuthorizationService } from 'src/app/shared/services/user-authorization.service'
+import jwt_decode from 'jwt-decode';
+
 
 @Component({
   selector: 'app-user-profile',
@@ -12,8 +13,10 @@ import { UserAuthorizationService } from 'src/app/shared/services/user-authoriza
   styleUrls: ['./user-profile.component.css']
 })
 export class UserProfileComponent implements OnInit {
-  isAuthorized: boolean = true;
+  isAuthorized!: boolean;
   showText: boolean = false;
+  token;
+  decoded;
   userId!: number;
   user: any;
   private routeSub!: Subscription;
@@ -22,11 +25,11 @@ export class UserProfileComponent implements OnInit {
   ngOnInit(): void {
     this.routeSub = this.route.params.subscribe(params => {
       this.userId = parseInt(params['id']);
+      this.isAuthorized = this.userIsUser()
       this.userProfileService.getUserInfo(this.userId).pipe(
         catchError(res => of(this.snackBar.open('User not found')))
       ).subscribe((user: any) => {
         this.user = user
-        console.log(this.user)
       });
     });
   }
@@ -37,5 +40,11 @@ export class UserProfileComponent implements OnInit {
 
   ngOnDestroy() {
     this.routeSub.unsubscribe();
+  }
+
+  userIsUser() {
+    this.token = localStorage.getItem('Auth-Token')
+    this.decoded = jwt_decode(this.token)
+    return this.userId === this.decoded.id
   }
 }

@@ -11,7 +11,7 @@ export class UserProfileService {
   constructor(private http: HttpClient) { }
 
   updateUserInfo(form: any, id: number) {
-    return this.http.put(`http://localhost:3000/api/user/updateProfile`, {...form, id: id});
+    return this.http.put(`http://localhost:3000/api/user/updateProfile`, { ...form, id: id });
   }
 
   getUserInfo(id: number): Observable<any> {

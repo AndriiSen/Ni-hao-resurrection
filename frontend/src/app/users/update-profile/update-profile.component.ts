@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subscription } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import jwt_decode from 'jwt-decode';
@@ -36,37 +36,33 @@ export class UpdateProfileComponent implements OnInit {
   ngOnInit(): void {
     this.token = localStorage.getItem('Auth-Token')
     this.decoded = jwt_decode(this.token)
-    console.log(this.decoded.id)
     this.userProfileService.getUserInfo(this.decoded.id).pipe(
-      map((user: any) => {
-        this.user = user
-        if (this.user) {
-          this.userInfo.patchValue({
-            name: this.user.userInfo.name,
-            lastname: this.user.userInfo.lastname,
-            middlename: this.user.userInfo.middlename,
-            district: this.user.userInfo.district,
-            city: this.user.userInfo.city,
-            about: this.user.userInfo.about,
-            phone: this.user.userInfo.phone,
-            gitHub: this.user.userInfo.gitHub,
-            linkedIn: this.user.userInfo.linkedIn
-          })
-        }
-      }),
       catchError(res => of(
         this.openSnackBar('No permissions'),
         this.router.navigate(['/home-page'])
-      )
-      )
-    ).subscribe();
+      ))
+    ).subscribe((user: any) => {
+      this.user = user
+      if (this.user) {
+        this.userInfo.patchValue({
+          name: this.user.userInfo.name,
+          lastname: this.user.userInfo.lastname,
+          middlename: this.user.userInfo.middlename,
+          district: this.user.userInfo.district,
+          city: this.user.userInfo.city,
+          about: this.user.userInfo.about,
+          phone: this.user.userInfo.phone,
+          gitHub: this.user.userInfo.gitHub,
+          linkedIn: this.user.userInfo.linkedIn
+        })
+      }
+    });
 
   }
   onSubmit(): void {
     this.userProfileService.updateUserInfo(this.userInfo.value, this.decoded.id).pipe(
-      map(() => this.openSnackBar('Successfully updated')),
       catchError(res => of(this.openSnackBar(res.error.message)))
-    ).subscribe();
+    ).subscribe(() => this.openSnackBar('Successfully updated'));
   }
   openSnackBar(message: string) {
     this.snackBar.open(message, 'Close')

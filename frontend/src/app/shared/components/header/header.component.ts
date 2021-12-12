@@ -3,6 +3,9 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { UserAuthorizationService } from '../../../shared/services/user-authorization.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { UserProfileService } from '../../services/user-profile.service';
+import jwt_decode from 'jwt-decode';
+
 
 @Component({
   selector: 'app-header',
@@ -13,10 +16,13 @@ export class HeaderComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private userAuthService: UserAuthorizationService,
+    private userProfileService: UserProfileService,
     private router: Router,
   ) { }
   show: boolean = true;
   isAuthorized: boolean = false;
+  token;
+  decoded;
   user: any;
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required, Validators.email]],
@@ -43,6 +49,14 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.token = localStorage.getItem('Auth-Token')
+    this.decoded = jwt_decode(this.token)
+    if (this.token) {
+      this.isAuthorized = true;
+      this.userProfileService.getUserInfo(this.decoded.id).subscribe(
+        user => this.user = user
+      )
+    }
   }
   @ViewChild('nameError') nameError;
   onSubmit() {

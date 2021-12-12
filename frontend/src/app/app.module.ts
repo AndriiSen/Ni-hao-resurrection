@@ -11,7 +11,6 @@ import { UpdateProfileComponent } from './users/update-profile/update-profile.co
 import { RouterModule } from '@angular/router';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { FormsModule } from '@angular/forms';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
-    FontAwesomeModule,
   ],
   providers: [
     {
