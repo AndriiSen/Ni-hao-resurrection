@@ -25,4 +25,11 @@ export class UserProfileService {
   getAllUsers(): Observable<any> {
     return this.http.get('http://localhost:3000/api/users')
   }
+
+  sendFriendshipRequest(requesterId, receiverId): Observable<any> {
+    return this.http.put('http://localhost:3000/api/friends', {
+      requesterId: requesterId,
+      receiverId: receiverId
+    })
+  }
 }

@@ -1,11 +1,11 @@
-<div class="width-container">
-    <mat-form-field>
-        <input type="text" matInput [matAutocomplete]='auto'>
-        <mat-autocomplete #auto="matAutocomplete">
-            <mat-option *ngFor="let user of usersList" [value]="user">
-              {{user}}
-            </mat-option>
-        </mat-autocomplete>
-    </mat-form-field>
+<div class="width-container" *ngIf="usersList">
+    <h2 class="title">Users</h2>
+    <div class="src-conteiner">
+        <input class="friends-src" type="text" [(ngModel)]="filterQuery" placeholder="Search...">
+    </div>
+    <mat-card class="user-card"  *ngFor="let user of usersList | filter:filterQuery">
+        <mat-card-title><a routerLink="/user/{{user.id}}">{{user.name}} {{user.lastname}} {{user.middlename}}</a></mat-card-title>
+        <button mat-mini-fab (click)="sendFriendshipRequest(user.id)">+</button>
+    </mat-card>
     
 </div>

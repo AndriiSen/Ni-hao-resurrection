@@ -8,6 +8,7 @@ import { UpdateUserDto } from "src/users/dto/update-user.dto";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { UserIsUserGuard } from "src/guards/userIsUser.guard";
 import { UsersRepository } from "src/users/users.repository";
+import { FriendshipDto } from "src/users/dto/friendship.dto";
 
 
 
@@ -54,4 +55,11 @@ export class AuthController {
     async updateUserInfo(@Param('id') userId: number, @Body() updateUserDto: UpdateUserDto) {
         return this.authService.updateUserInfo(userId, updateUserDto)
     }
+
+    
+    @Put('friends')
+    async sendFriendshipRequest(@Body() friendshipDto: FriendshipDto) {
+        return this.authService.sendFriendshipRequest(friendshipDto.requesterId , friendshipDto.receiverId)
+    }
+
 }

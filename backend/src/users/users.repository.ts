@@ -27,4 +27,8 @@ export class UsersRepository {
   async findOneAndUpdate(userFilterQuery: FilterQuery<User>, updateInfo: any): Promise<User> {
     return this.userModel.findOneAndUpdate(userFilterQuery, { userInfo: updateInfo });
   }
+
+  async updateFriendshipRequests(userFilterQuery: FilterQuery<User>, friendshipRequest): Promise<User> {
+    return this.userModel.findOneAndUpdate(userFilterQuery, {$push: {friendshipRequests: friendshipRequest}})
+  }
 }

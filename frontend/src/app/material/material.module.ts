@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule, } from '@angular/material/form-field'
 import { MatInputModule } from '@angular/material/input'
-import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatBadgeModule } from '@angular/material/badge';
@@ -13,13 +12,12 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
-
+import {MatCardModule} from '@angular/material/card';
 
 const MaterialComponents = [
   MatButtonModule,
   MatFormFieldModule,
   MatInputModule,
-  MatCardModule,
   MatGridListModule,
   MatIconModule,
   MatBadgeModule,
@@ -29,7 +27,8 @@ const MaterialComponents = [
   MatDatepickerModule,
   MatSnackBarModule,
   MatSidenavModule,
-  MatAutocompleteModule
+  MatAutocompleteModule,
+  MatCardModule
 ];
 
 @NgModule({

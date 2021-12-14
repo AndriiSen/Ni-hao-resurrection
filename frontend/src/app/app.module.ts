@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { FormsModule } from '@angular/forms';
 import { FindUsersComponent } from './users/find-users/find-users.component';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 
 @NgModule({
   declarations: [
@@ -29,6 +31,7 @@ import { FindUsersComponent } from './users/find-users/find-users.component';
     BrowserAnimationsModule,
     RouterModule,
     FormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [
     {

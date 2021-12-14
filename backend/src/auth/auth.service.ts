@@ -67,4 +67,16 @@ export class AuthService {
     }
     return user.userInfo
   }
+
+  async sendFriendshipRequest(requesterId, receiverId) {
+    const requester = this.usersRepository.findOne({ requesterId })
+    const receiver = this.usersRepository.findOne({ receiverId })
+    if(requester && receiver) {
+      const friendshipRequest = {
+        requesterId: requesterId,
+        receiverId: receiverId
+      }
+     return this.usersRepository.updateFriendshipRequests({ receiverId }, friendshipRequest)
+    }
+  }
 }

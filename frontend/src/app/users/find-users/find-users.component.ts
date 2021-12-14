@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { map } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
+import jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-find-users',
@@ -8,16 +8,26 @@ import { UserProfileService } from 'src/app/shared/services/user-profile.service
   styleUrls: ['./find-users.component.css']
 })
 export class FindUsersComponent implements OnInit {
-  usersList = ['andrii', 'makar', 'sergio', 'gooote', 'ramada', 'jafar'];
+  usersList;
+  filterQuery: string | undefined;
+  token;
+  decoded;
 
   constructor(private userProfileService: UserProfileService) { }
 
   ngOnInit(): void {
     this.userProfileService.getAllUsers().subscribe(
       data => {
-        this.usersList = data
-        console.log(this.usersList)
+        this.usersList = data.map(el => el.userInfo)
       }
+    )
+    this.token = localStorage.getItem('Auth-Token')
+    this.decoded = jwt_decode(this.token)
+  }
+
+  sendFriendshipRequest(receiverId) {
+    this.userProfileService.sendFriendshipRequest(this.decoded.id, receiverId).subscribe(
+      data => console.log('send')
     )
   }
 }
