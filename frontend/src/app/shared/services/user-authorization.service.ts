@@ -1,32 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { map } from 'rxjs/operators';
+
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserAuthorizationService {
-  url: string = 'http://localhost:3000/auth/register';
-  httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'my-auth-token',
-    }),
-  };
 
-  urlLogin: string = 'http://localhost:3000/api/auth/login';
-  httpLoginOptions = {
-    headers: new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: 'barer',
-    }),
-  };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
+
+  private token;
 
   sendRegForm(form: any) {
-    return this.http.post(this.url, form, this.httpOptions);
+    return this.http.post('http://localhost:3000/api/auth/register', form);
   }
+
 
   sendLoginForm(form: any) {
     return this.http
@@ -35,18 +25,14 @@ export class UserAuthorizationService {
       })
       .pipe(
         map((user) => {
+          this.token = user.headers.get('Auth-token')
           return user;
         })
       );
   }
 
   getToken() {
-    return localStorage.getItem('Auth-Token');
+    return localStorage.getItem('Auth-Token')
   }
 
-  
 }
-
-
-
-

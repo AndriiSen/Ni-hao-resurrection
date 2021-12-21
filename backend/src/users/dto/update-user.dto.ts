@@ -1,5 +1,12 @@
 export class UpdateUserDto {
-    login: string;
-    email: string;
-    password: string;
+    id: number
+    name: string
+    lastname: string
+    middlename: string
+    district: string
+    city: string
+    phone: string
+    gitHub: string
+    linkedIn: string
+    about: string
 }

@@ -6,8 +6,8 @@ import { HomePageComponent } from '../shared/components/home-page/home-page.comp
 
 const routes: Routes = [
   { path: 'register', component: RegisterComponent },
-  { path: 'home-page', component: HomePageComponent},
-  { path: '**', component: PageNotFoundComponent}
+  { path: 'home-page', component: HomePageComponent },
+  { path: '**', component: PageNotFoundComponent }
 ];
 
 @NgModule({

@@ -1,9 +1,13 @@
 .navboard {
+  display: flex;
+  justify-content: space-between;
+  background-color: rgb(39, 39, 39);
   width: 100vw;
   height: 8vh;
-  background-color: rgb(39, 39, 39);
-  display: flex;
   position: relative;
+}
+.auth {
+  display: flex;
 }
 
 .login.remove,

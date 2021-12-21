@@ -1,0 +1,95 @@
+<div *ngIf="user">
+  <div class="conteiner">
+    <div class="profile-actions">
+      <button mat-mini-fab color="primary">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <button
+        mat-mini-fab
+        color="primary"
+        *ngIf="isAuthorized"
+        routerLink="/updateProfile"
+      >
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>message</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>person_add</mat-icon>
+      </button>
+      <button mat-mini-fab color="primary">
+        <mat-icon>share</mat-icon>
+      </button>
+    </div>
+    <mat-card class="main-card">
+      <div class="main-left">
+        <mat-card-title
+          >{{ user.userInfo.name }} {{ user.userInfo.lastname }}
+          {{ user.userInfo.middlename }}</mat-card-title
+        >
+        <mat-card-subtitle
+          ><mat-icon> location_on</mat-icon> {{ user.userInfo.district }},
+          {{ user.userInfo.city }}</mat-card-subtitle
+        >
+        <mat-card-content>
+          {{ user.userInfo.about }}
+        </mat-card-content>
+      </div>
+      <img
+        class="profile-img"
+        mat-card-lg-image
+        src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+      />
+    </mat-card>
+    <div class="friends-actions-comments">
+      <div class="left-side">
+        <mat-card class="contacts">
+          <mat-card-title> Contacts </mat-card-title>
+          <ul>
+            <li>
+              <a href="tel:{{ user.userInfo.phone }}">{{
+                user.userInfo.phone
+              }}</a>
+            </li>
+            <li>
+              <a href="mailto:{{ user.email }}" target="_blank">{{
+                user.email
+              }}</a>
+            </li>
+            <li>
+              <a href="{{ user.userInfo.gitHub }}" target="_blank">GitHub</a>
+            </li>
+            <li>
+              <a href="{{ user.userInfo.linkedIn }}" target="_blank"
+                >LinkedIn</a
+              >
+            </li>
+          </ul>
+        </mat-card>
+        <mat-card class="friends-card">
+          <mat-card-title> Friends </mat-card-title>
+          <div class="friends-list">
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+            <img
+              mat-card-sm-image
+              src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+            />
+          </div>
+        </mat-card>
+      </div>
+      <div class="right-side">
+        <mat-card class="comments">
+          <mat-card-title> Comments section </mat-card-title>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+</div>

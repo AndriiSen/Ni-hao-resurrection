@@ -1,0 +1,84 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.conteiner {
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: auto;
+  width: 100%;
+  max-width: 980px;
+  min-height: 900px;
+}
+
+mat-card {
+  margin: 3px;
+  border-radius: 10px;
+}
+.main-card {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.friends-actions-comments {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
+.left-side .contacts ul li {
+  list-style: none;
+}
+.left-side .contacts ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.friends-card {
+  display: flex;
+  flex-direction: column;
+}
+.friends-card .friends-list {
+  display: flex;
+  justify-content: space-around;
+}
+
+.friends-card img {
+  border-radius: 50%;
+}
+
+.profile-actions {
+  padding: 5px;
+}
+
+.profile-actions button {
+  transition: 1s;
+  margin-left: 10px;
+}
+.profile-actions button:hover {
+  transform: scale(1.2);
+  transition: 0.5s;
+}
+
+@media (max-width: 775px) {
+  .friends-actions-comments {
+    display: flex;
+    flex-direction: column;
+  }
+  .profile-actions {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+@media (max-width: 500px) {
+  .main-card {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+  .main-left mat-card-title {
+    margin-top: 10px;
+  }
+}

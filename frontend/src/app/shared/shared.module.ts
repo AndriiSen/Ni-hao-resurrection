@@ -16,7 +16,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     CommonModule,
     RouterModule,
     FormsModule,
-        ReactiveFormsModule
+    ReactiveFormsModule
   ],
   exports: [
     HeaderComponent,

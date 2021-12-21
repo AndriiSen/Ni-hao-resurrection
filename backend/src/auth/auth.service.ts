@@ -1,19 +1,19 @@
-import {
-  ConflictException,
-  Injectable,
-  UnauthorizedException,
-} from '@nestjs/common';
-import { UsersRepository } from 'src/users/users.repository';
+import { BadRequestException, ConflictException, Injectable, UnauthorizedException } from "@nestjs/common";
+import { UsersRepository } from "src/users/users.repository";
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
-import { User } from 'src/users/schemas/user.schema';
+import { JwtService } from "@nestjs/jwt";
+import { User } from "src/users/schemas/user.schema";
+import jwt_decode from 'jwt-decode';
+
+
 
 @Injectable()
 export class AuthService {
+  decoded;
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   async validateAndLogin(email: string, password: string): Promise<any> {
     const user = await this.usersRepository.findOne({ email });
@@ -24,23 +24,21 @@ export class AuthService {
     if (!passwordIsValid) {
       throw new UnauthorizedException();
     }
+
     return {
       statusCode: 200,
       message: 'Success',
       userData: user,
     };
   }
-
-  async generateJwtToken(email: string): Promise<any> {
-    const jwtToken = await this.jwtService.signAsync({ email: email });
-    return jwtToken;
+  async generateJwtToken(id: string): Promise<any> {
+    const jwtToken = await this.jwtService.signAsync({
+      id: id
+    })
+    return jwtToken
   }
 
-  async createUser(
-    email: string,
-    login: string,
-    password: string,
-  ): Promise<User> {
+  async createUser(email: string, login: string, password: string): Promise<User> {
     const user = await this.usersRepository.findOne({ email });
     if (user) {
       throw new ConflictException({
@@ -56,5 +54,22 @@ export class AuthService {
       login,
       password: await bcrypt.hash(password, +process.env.salt),
     });
+  }
+
+  async updateUserInfo(token: string, updateInfo: any): Promise<any> {
+    this.decoded = jwt_decode(token)
+    return this.usersRepository.findOneAndUpdate({ id: this.decoded.id }, updateInfo)
+  }
+
+  async getUserProfile(userId: number): Promise<any> {
+    const user = await this.usersRepository.findOne({ userId })
+    if (!user) {
+      throw new BadRequestException('Invalid user')
+    }
+    return user
+  }
+
+  async getAllUsers() {
+    return this.usersRepository.find({})
   }
 }

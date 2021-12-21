@@ -2,6 +2,17 @@ import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 export type UserDocument = User & Document
 
+interface IUpdateUserInfo {
+    name: string,
+    lastname: string,
+    middlename: string,
+    district: string,
+    city: string,
+    phone: string,
+    gitHub: string,
+    linkedIn: string,
+    about: string,
+}
 @Schema()
 export class User {
     @Prop()
@@ -18,6 +29,9 @@ export class User {
 
     @Prop()
     date: string;
+
+    @Prop({ type: Object })
+    userInfo?: IUpdateUserInfo;
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);
