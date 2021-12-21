@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Put, Res, UnauthorizedException, UseGuards } from "@nestjs/common";
+import { Body, Controller, Get, Header, Param, Post, Put, Req, Res, UnauthorizedException, UseGuards } from "@nestjs/common";
 import { AuthUserDto } from "./dto/auth-user.dto"
 import { AuthService } from "./auth.service";
 import { Response } from "express";
@@ -6,27 +6,25 @@ import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { User } from "src/users/schemas/user.schema";
 import { UpdateUserDto } from "src/users/dto/update-user.dto";
 import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
-
-
+import { UsersRepository } from "src/users/users.repository";
+import { Headers } from '@nestjs/common';
 
 
 @Controller()
 export class AuthController {
     constructor(
-        private readonly authService: AuthService
+        private readonly authService: AuthService, private usersRepository: UsersRepository
     ) { };
-
+    @Get('/users')
+    async getAllUsers() {
+        return this.usersRepository.find({})
+    }
 
     @Get('user/:id')
     async getUserProfile(@Param('id') userId: number) {
         return this.authService.getUserProfile(userId)
     }
 
-    @Get('users')
-    async getAllUsers() {
-        return this.authService.getAllUsers()
-    }
-    
     @Post('auth/login')
     async validateAndLogin(@Body() loginUserDto: AuthUserDto, @Res() res: Response): Promise<any> {
         const user = await this.authService.validateAndLogin(loginUserDto.email, loginUserDto.password)
@@ -45,8 +43,10 @@ export class AuthController {
     }
 
     @UseGuards(JwtAuthGuard)
-    @Put('user/updateProfile')
-    async updateUserInfo(@Body() updateUserDto: UpdateUserDto) {
-        return this.authService.updateUserInfo(updateUserDto.id, updateUserDto)
+    @Put('user/:id/update')
+    async updateUserInfo(@Headers() headers, @Body() updateUserDto: UpdateUserDto) {
+        const token = headers.authorization
+        return this.authService.updateUserInfo(token, updateUserDto)
     }
+
 }

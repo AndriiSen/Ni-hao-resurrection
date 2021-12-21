@@ -10,8 +10,8 @@ export class UserProfileService {
 
   constructor(private http: HttpClient) { }
 
-  updateUserInfo(form: any, id: number) {
-    return this.http.put(`http://localhost:3000/api/user/updateProfile`, { ...form, id: id });
+  updateUserInfo(form: any) {
+    return this.http.put(`http://localhost:3000/api/user/updateProfile`, { form });
   }
 
   getUserInfo(id: number): Observable<any> {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, Subscription } from 'rxjs';
-import { catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { UserProfileService } from 'src/app/shared/services/user-profile.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import jwt_decode from 'jwt-decode';
@@ -38,8 +38,7 @@ export class UpdateProfileComponent implements OnInit {
     this.decoded = jwt_decode(this.token)
     this.userProfileService.getUserInfo(this.decoded.id).pipe(
       catchError(res => of(
-        this.openSnackBar('No permissions'),
-        this.router.navigate(['/home-page'])
+        this.snackBar.open('No permissions')
       ))
     ).subscribe((user: any) => {
       this.user = user
@@ -60,13 +59,11 @@ export class UpdateProfileComponent implements OnInit {
 
   }
   onSubmit(): void {
-    this.userProfileService.updateUserInfo(this.userInfo.value, this.decoded.id).pipe(
-      catchError(res => of(this.openSnackBar(res.error.message)))
-    ).subscribe(() => this.openSnackBar('Successfully updated'));
+    this.userProfileService.updateUserInfo(this.userInfo.value).pipe(
+      catchError(res => of(this.snackBar.open(res.error.message, 'Close')))
+    ).subscribe(() => this.snackBar.open('Successfully updated', 'Close'));
   }
-  openSnackBar(message: string) {
-    this.snackBar.open(message, 'Close')
-  }
+
   ngOnDestroy() {
     this.routeSub.unsubscribe();
   }

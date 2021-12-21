@@ -3,12 +3,13 @@ import { UsersRepository } from "src/users/users.repository";
 import * as bcrypt from 'bcrypt';
 import { JwtService } from "@nestjs/jwt";
 import { User } from "src/users/schemas/user.schema";
-import { UpdateUserDto } from "src/users/dto/update-user.dto";
+import jwt_decode from 'jwt-decode';
 
 
 
 @Injectable()
 export class AuthService {
+  decoded;
   constructor(
     private readonly usersRepository: UsersRepository,
     private readonly jwtService: JwtService,
@@ -55,8 +56,9 @@ export class AuthService {
     });
   }
 
-  async updateUserInfo(userId: number, updateInfo: any): Promise<any> {
-    return this.usersRepository.findOneAndUpdate({ userId }, updateInfo)
+  async updateUserInfo(token: string, updateInfo: any): Promise<any> {
+    this.decoded = jwt_decode(token)
+    return this.usersRepository.findOneAndUpdate({ id: this.decoded.id }, updateInfo)
   }
 
   async getUserProfile(userId: number): Promise<any> {
